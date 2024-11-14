@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
 })
 
 export class LoginService {
-  private apiUrl="http://localhost:8080/api/v1/auth/login"; /**introduce la url */
+  private apiUrl="http://127.0.0.1:8080/api/v1/auth/login"; /**introduce la url */
   constructor(private http: HttpClient) { }
 
   checkUser(email:String, password:String):Observable<any>{
