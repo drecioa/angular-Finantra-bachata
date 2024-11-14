@@ -1,4 +1,35 @@
 body {
+    position: relative;
+    width: 100vh;
+    min-height: 100vh;
     background-color: #092E46;
-    overflow: hidden; 
-  }
+    overflow: hidden;
+    margin: 0;
+    box-sizing: border-box;
+    color: white;
+}
+hr{
+    width: 100%;
+}
+
+h1{
+    color: #09f;
+}
+
+.disFlex{
+    display: flex;
+    gap: 5%;
+}
+
+.flexCols{
+    flex-flow: column nowrap;
+}
+
+.flex1{
+    flex: 1;
+}
+
+.centradoFlex{
+    justify-content: center;
+    align-items: center;
+}

@@ -1,8 +1,18 @@
-<form [formGroup]="form" (ngSubmit)="logIn()" method="post">
-    <label for="email">Email:</label>
-    <input type="email" formControlName="email">
-    <label for="password" >Password</label>
-    <input type="password" formControlName="password">
+<section class="disFlex centradoFlex flexCols">
+    <form [formGroup]="form" (ngSubmit)="logIn()" method="post" class="disFlex flexCols">
+        <h1>Login</h1>
 
-    <button type="submit">Log in</button>
-</form>
+        <div class="flex1 disFlex flexCols gap5">
+            <label for="email">Email:</label>
+            <input type="email" formControlName="email" placeholder="yourName@example.com">
+        </div>
+        <div class="flex1 disFlex flexCols gap5">
+            <label for="password" >Password</label>
+            <input type="password" formControlName="password" >
+        </div>
+        
+        <hr>
+        <a href="#">Registrarme</a>
+        <button type="submit">Log in</button>
+    </form>
+</section>
