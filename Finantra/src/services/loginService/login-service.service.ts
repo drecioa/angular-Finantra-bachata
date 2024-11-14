@@ -10,7 +10,7 @@ export class LoginService {
   private apiUrl="http://127.0.0.1:8080/api/v1/auth/login"; /**introduce la url */
   constructor(private http: HttpClient) { }
 
-  checkUser(email:String, password:String):Observable<any>{
-    return this.http.post<any>(this.apiUrl, new LoginDto(email, password));
+  checkUser(login: LoginDto):Observable<any>{
+    return this.http.post(this.apiUrl, login);
   }
 }
