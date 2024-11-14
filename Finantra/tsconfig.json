@@ -22,20 +22,18 @@
     "lib": [
       "ES2022",
       "dom"
-    ]
-  },
-  "angularCompilerOptions": {
-    "enableI18nLegacyMessageIdFormat": false,
-    "strictInjectionParameters": true,
-    "strictInputAccessModifiers": true,
-    "strictTemplates": true
-  },
-  "compilerOptions": {
+    ],
     "baseUrl": "./",
     "paths": {
       "@components/*": ["src/components/*"],
       "@services/*": ["src/services/*"],
       "@models/*": ["src/models/*"]
     }
+  },
+  "angularCompilerOptions": {
+    "enableI18nLegacyMessageIdFormat": false,
+    "strictInjectionParameters": true,
+    "strictInputAccessModifiers": true,
+    "strictTemplates": true
   }
 }

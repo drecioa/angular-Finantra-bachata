@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { RegisterService } from './register.service';
+import { RegisterService } from '@services/registerService/register.service';
 import { CommonModule } from '@angular/common';
+import { RegisterDTO } from '@models/register-dto.model';
 
 @Component({
   selector: 'app-register',

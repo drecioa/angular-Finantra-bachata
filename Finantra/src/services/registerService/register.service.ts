@@ -1,13 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-
-interface RegisterDTO {
-  email:string;
-  password:string;
-  firstName:string;
-  lastName:string;
-}
+import { RegisterDTO } from '@models/register-dto.model';
 
 @Injectable()
 export class RegisterService {
