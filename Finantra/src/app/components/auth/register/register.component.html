@@ -1,5 +1,8 @@
 <div class="register-container">
     <h2>Register</h2>
+    <div *ngIf="registerStatus" class="register-status">
+        <p>{{ registerStatus }}</p>
+    </div>
     <form [formGroup]="registerForm" (ngSubmit)="submitRegister()" method="post">
         <div class="campos">
             <div class="columnLeft">

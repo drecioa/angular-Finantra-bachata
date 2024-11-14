@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
 import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { RegisterService } from './register.service';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-register',
   standalone: true,
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, CommonModule],
   templateUrl: './register.component.html',
   styleUrl: './register.component.css',
   providers: [RegisterService]
@@ -27,9 +28,11 @@ export class RegisterComponent {
     if (this.registerForm.valid) {
       this.registerService.register(this.registerForm.value).subscribe(
         (response) => {
+          this.registerStatus = 'Registro exitoso!';
           console.log(response);
         }, 
         (error) => {
+          this.registerStatus = 'Registro fallido!';
           console.log(error);
         }
       )

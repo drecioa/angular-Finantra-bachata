@@ -1,81 +1,82 @@
 .register-container {
-    position: fixed; /* Hace que el contenedor sea flotante */
-    top: 50%; /* Centra verticalmente */
-    left: 50%; /* Centra horizontalmente */
-    transform: translate(-50%, -50%); /* Ajusta la posición para centrar completamente */
-    max-width: 900px; /* Ajusta el máximo ancho para que se vea bien */
-    padding: 30px; /* Añadimos espacio interior (padding) alrededor del formulario */
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    width: 100%; /* Hace que ocupe el 100% del ancho disponible hasta 900px */
-    box-sizing: border-box; /* Asegura que el padding no haga que el contenedor se salga de su tamaño */
-  }
-  
-  /* Estilo para el encabezado */
-  h2 {
-    text-align: center; /* Centra el título */
-    margin-bottom: 20px;
-  }
-  
-  /* El formulario estará alineado horizontalmente */
-  form {
-    display: flex;
-    flex-direction: column; /* Cambié a columna para que las columnas no se apilen horizontalmente */
-    gap: 20px; /* Espacio entre los campos y el botón */
-    flex-grow: 1; /* Esto permite que el formulario ocupe el máximo de espacio disponible */
-    margin-bottom: 10px; /* Reducir el espacio entre el formulario y el botón */
-  }
-  
-  /* Contenedor de las columnas */
-  .campos {
-    display: flex;
-    justify-content: space-between; /* Esto asegura que las columnas estén en lados opuestos */
-    gap: 20px; /* Espacio entre las columnas */
-    width: 100%;
-  }
-  
-  /* Estilos para las columnas */
-  .columnLeft, .columnRight {
-    flex: 1; /* Cada columna ocupa el 50% del contenedor */
-    padding: 10px;
-  }
-  
-  /* Estilo para los campos del formulario */
-  .form-group {
-    margin-bottom: 15px;
-  }
-  
-  /* Estilos para los labels */
-  label {
-    font-weight: bold;
-    display: block;
-    margin-bottom: 5px;
-  }
-  
-  /* Estilo para los inputs */
-  input {
-    width: 100%;
-    padding: 8px;
-    box-sizing: border-box;
-    margin-bottom: 5px;
-  }
-  
-  /* Estilo para el botón de submit */
-  button {
-    width: auto; /* Hace que el botón tenga un tamaño más pequeño */
-    padding: 8px 20px;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    align-self: center; /* Esto centra el botón */
-    margin-top: 10px; /* Un poco de espacio entre los campos y el botón */
-  }
-  
-  button:disabled {
-    background-color: #ccc;
-  }
+  background-color: #114669;
+  position: fixed; 
+  top: 50%; 
+  left: 50%; 
+  transform: translate(-50%, -50%); 
+  max-width: 900px; 
+  padding: 30px;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 100%; 
+  box-sizing: border-box; 
+}
+
+h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  color:#0099FF;
+}
+
+form {
+  display: flex;
+  flex-direction: column; 
+  gap: 20px; 
+  flex-grow: 1; 
+  margin-bottom: 10px; 
+}
+
+.campos {
+  display: flex;
+  justify-content: space-between; 
+  gap: 20px; 
+  width: 100%;
+}
+
+.columnLeft, .columnRight {
+  flex: 1; 
+  padding: 10px;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+label {
+  color:#FFFFFF;
+  font-weight: bold;
+  display: block;
+  margin-bottom: 5px;
+}
+
+input {
+  width: 100%;
+  padding: 8px;
+  box-sizing: border-box;
+  margin-bottom: 5px;
+}
+
+button {
+  width: auto; 
+  padding: 8px 20px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  align-self: center; 
+  margin-top: 10px; 
+}
+
+button:disabled {
+  background-color: #ccc;
+}
+
+.register-status {
+  color: red; 
+  font-size: 18px; 
+  text-align: center; 
+  margin-bottom: 20px; 
+}
