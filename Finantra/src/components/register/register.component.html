@@ -1,23 +1,23 @@
-<div class="register-container">
-    <h2>Register</h2>
-    <div *ngIf="registerStatus" class="register-status">
+<section class="register-container disFlex flexColsNoWrap selfAlign">
+    <h1>Register</h1>
+    <ng-container *ngIf="registerStatus" class="error">
         <p>{{ registerStatus }}</p>
-    </div>
-    <form [formGroup]="registerForm" (ngSubmit)="submitRegister()" method="post">
-        <div class="campos">
-            <div class="columnLeft">
+    </ng-container>
+    <form [formGroup]="registerForm" (ngSubmit)="submitRegister()" method="post" class="disFlex flexRowsWrap gap20">
+        <article class="disFlex flexRowsWrap">
+            <div class="content">
                 <div class="form-group">
                     <label for="email">Email</label>
                     <input type="email" id="email" formControlName="email" required>
                 </div>
-            
+                
                 <div class="form-group">
                     <label for="password">Password</label>
                     <input type="password" id="password"  formControlName="password" required>
                 </div>
             </div>
-
-            <div class="columnRight">
+    
+            <div class="content">
                 <div class="form-group">
                     <label for="firstName">First Name</label>
                     <input type="text" id="firstName" formControlName="firstName" required>
@@ -27,11 +27,13 @@
                     <label for="lastName">Last Name</label>
                     <input type="text" id="lastName" formControlName="lastName" required>
                 </div>
-            </div>
-        </div>
+            </div>    
+        </article>
+        
+        <article class="disFlex flexColsNoWrap">
+            <a href="#" class="selfAlign"><p>Login</p></a>
+            <button type="submit">Register</button>
+        </article>
 
-        <a href="#"><p>Login</p></a>
-  
-        <button type="submit">Register</button>
     </form>
-</div>
+</section>
