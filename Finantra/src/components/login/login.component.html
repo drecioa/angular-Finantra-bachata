@@ -2,12 +2,15 @@
     <form [formGroup]="form" (ngSubmit)="logIn()" method="post" class="disFlex flexColsNoWrap centradoFlex">
         <h1 class="autoCenter">Login</h1>
 
+        <p class="error textAlign" id="error">
+            Correo o contraseña incorrecto
+        </p>
         <div class="flex1 disFlex flexColsNoWrap gap5">
             <label for="email">Email:</label>
             <input type="email" formControlName="email" placeholder="yourName@example.com">
         </div>
         <div class="flex1 disFlex flexColsNoWrap gap5">
-            <label for="password" >Password</label>
+            <label for="password" >Password:</label>
             <input type="password" formControlName="password" >
         </div>
         

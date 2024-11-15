@@ -29,7 +29,10 @@ export class LoginComponent {
           console.log(data);
         }, 
         (error)=>{
-          alert("error en errror")
+          const err = document.getElementById("error");
+          if (err) {
+            err.style.visibility = "visible";
+          }
           console.log(error);
         }
       );
