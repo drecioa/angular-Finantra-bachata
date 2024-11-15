@@ -1,13 +1,15 @@
-body {
-    position: relative;
-    width: 100vh;
-    min-height: 100vh;
-    background-color: #092E46;
-    overflow: hidden;
-    margin: 0;
+*{
     box-sizing: border-box;
+    margin: 0;
+}
+body {
+    box-sizing: border-box;
+    background-color: #092E46;
+    overflow: auto;
+    margin: 0;
     color: white;
 }
+
 hr{
     width: 100%;
 }
@@ -16,13 +18,70 @@ h1{
     color: #09f;
 }
 
+a{
+    width: max-content;
+    color: #09f;
+    font-size: larger;
+    text-decoration: none;
+
+    transition: 1s color;
+    &:hover{
+        color: white;
+    }
+}
+
+section{
+    background-color: #114669;
+    padding: 5% 10%;
+    border-radius: 8px;
+    height: max-content;
+}
+
+label {
+    color:#FFFFFF;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+input{
+    width: 100%;
+    border-radius: 10px;
+    text-align: center;
+    color: rgb(209, 209, 209);
+    padding: 3%;
+    background-color: #578DB0;
+    transition: 1s border;
+    &:focus{
+        color: white;
+        background-color: #64a4ce;
+        border: 2px #19a7ff solid;
+        outline: none;
+    }
+}
+
+input::placeholder{
+    color: #114669;
+}
+
+/*++++++++++++++++++FLEX+++++++++++++++++++*/
 .disFlex{
     display: flex;
     gap: 5%;
 }
 
-.flexCols{
+.flexColsNoWrap{
     flex-flow: column nowrap;
+}
+.flexColsWrap{
+    flex-flow: column wrap;
+}
+
+.flexRowsNoWrap{
+    flex-flow: row nowrap;
+}
+
+.flexRowsWrap{
+    flex-flow: row wrap;
 }
 
 .flex1{
@@ -33,3 +92,45 @@ h1{
     justify-content: center;
     align-items: center;
 }
+
+.selfAlign{
+    justify-self: center;
+    align-self: center;
+}
+
+
+
+
+/***************************Otros*********************************/
+
+.error {
+    color: red; 
+    font-size: 18px; 
+    text-align: center; 
+    margin-bottom: 20px; 
+}
+
+
+
+
+
+
+
+
+
+
+
+
+/************Gap*************/
+.gap5{
+    gap: 5px;
+}
+
+.gap15{
+    gap: 15px;
+}
+
+.gap20{
+    gap: 20px;
+}
+  
