@@ -6,14 +6,14 @@ import { SessionComponent } from '@components/session/session.component';
 import { sessionGuard } from 'src/guards/session.guard';
 
 const routes: Routes = [
-    {path:"session", component:SessionComponent,
+    {path:"auth", component:SessionComponent,
         children: [
             {path: 'login', component:LoginComponent},
             {path: 'register', component:RegisterComponent}
         ]
     },
     {path:"home", component:AppComponent, canActivate:[sessionGuard]},
-    {path:"", redirectTo:'/session', pathMatch:"full"}
+    {path:"", redirectTo:'/auth', pathMatch:"full"}
 
 ];
 
