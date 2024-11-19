@@ -1,7 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { HomeComponent } from "../home/home.component";
-import { AuthService } from '@services/authService/auth.service';
-import { Router } from '@angular/router';
+import { UtilsService } from '@services/utilsService/utils.service';
 
 @Component({
   selector: 'app-header',
@@ -11,10 +10,9 @@ import { Router } from '@angular/router';
   styleUrl: './header.component.css'
 })
 export class HeaderComponent {
-  private auth=inject(AuthService);
-  private redirect=inject(Router);
+  constructor (private util:UtilsService){}
   logout():void{
-    this.auth.logout();
-    this.redirect.navigate(["/auth"]);
+    this.util.auth.logout();
+    this.util.redirect.navigate(["/auth"]);
   }
 }

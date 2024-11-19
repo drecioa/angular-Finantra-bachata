@@ -3,8 +3,7 @@ import { LoginService } from '../../services/loginService/login-service.service'
 import { CommonModule } from "@angular/common";
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
-import { AuthService } from '@services/authService/auth.service';
-import { Router } from '@angular/router';
+import { UtilsService } from '@services/utilsService/utils.service';
 
 @Component({
   selector: 'app-login',
@@ -14,10 +13,8 @@ import { Router } from '@angular/router';
   styleUrl: './login.component.css'
 })
 export class LoginComponent {
-  private auth=inject(AuthService);
-  private redirect=inject(Router);
   protected form: FormGroup;
-  constructor(private login: LoginService, private builder: FormBuilder){
+  constructor(private login: LoginService, private builder: FormBuilder, private util:UtilsService){
     this.form=this.builder.group({
        email:['', [Validators.required, Validators.email]],
        password:['', Validators.required]
@@ -29,8 +26,8 @@ export class LoginComponent {
       this.login.checkUser(this.form.value).subscribe(
         (data)=>{
           console.log(data);
-          this.auth.login();
-          this.redirect.navigate(["/home"]);
+          this.util.auth.login();
+          this.util.redirect.navigate(["/home"]);
         }, 
         (error)=>{
           const err = document.getElementById("error");
