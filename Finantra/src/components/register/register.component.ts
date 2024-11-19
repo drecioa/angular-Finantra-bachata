@@ -1,8 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { RegisterService } from '@services/registerService/register.service';
 import { CommonModule } from '@angular/common';
 import { RegisterDTO } from '@models/register-dto.model';
+import { AuthService } from '@services/authService/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -13,6 +15,8 @@ import { RegisterDTO } from '@models/register-dto.model';
   providers: [RegisterService]
 })
 export class RegisterComponent {
+  private auth=inject(AuthService);
+  private redirect=inject(Router);
   registerForm:FormGroup;
   registerStatus: string | null = null;
   
@@ -30,6 +34,7 @@ export class RegisterComponent {
       this.registerService.register(this.registerForm.value).subscribe(
         (response) => {
           this.registerStatus = 'Registro exitoso!';
+          this.redirect.navigate(["/auth/login"])
           console.log(response);
         }, 
         (error) => {
