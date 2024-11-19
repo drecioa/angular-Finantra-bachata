@@ -6,11 +6,11 @@
             <h3> Jhon Doe</h3>
         </div>
         <div class="disFlex options">
-            <span class="material-symbols-outlined">home</span>
-            <span class="material-symbols-outlined">insert_chart</span>
-            <span class="material-symbols-outlined">add_circle</span>
-            <span class="material-symbols-outlined">breaking_news</span>
-            <span class="material-symbols-outlined">account_circle</span>
+            <span class="material-symbols-outlined" (click)="setPage('home')">home</span>
+            <span class="material-symbols-outlined" (click)="setPage('statistic')">insert_chart</span>
+            <span class="material-symbols-outlined" (click)="setPage('add')">add_circle</span>
+            <span class="material-symbols-outlined" (click)="setPage('news')">breaking_news</span>
+            <span class="material-symbols-outlined" (click)="setPage('user account')">account_circle</span>
         </div>
     </div>
     <div class="disFlex centradoFlex chart">
@@ -20,5 +20,21 @@
         <span class="material-symbols-outlined">logout</span>
     </div>
 </div>
-<app-home></app-home>
+@switch (this.page) {
+    @case ('home') {
+        <app-home></app-home>
+    }
+    @case ('statistic') {
+        <p>Estadisticas</p>
+    }
+    @case ('add') {
+        <p>Añadir</p>
+    }
+    @case ('news') {
+        <p>Noticias</p>
+    }
+    @case ('user account') {
+        <p>Cuenta de usuario</p>
+    }
+}
 <!--<router-outlet></router-outlet>-->

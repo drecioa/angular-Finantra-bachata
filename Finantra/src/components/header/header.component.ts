@@ -9,5 +9,9 @@ import { HomeComponent } from "../home/home.component";
   styleUrl: './header.component.css'
 })
 export class HeaderComponent {
+  page:string = 'home';
 
+  setPage(page:string):void {
+    this.page = page;
+  }
 }
