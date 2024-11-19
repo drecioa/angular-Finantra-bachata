@@ -7,7 +7,7 @@ export const sessionGuard: CanActivateFn = (route, state) => {
   const ruta=inject(Router);
 
   if(!auth.isLogged()){
-    ruta.navigate(["/session"]);
+    ruta.navigate(["/auth/login"]);
     return false;
   }
 

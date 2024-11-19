@@ -4,6 +4,7 @@ import { LoginComponent } from '@components/login/login.component';
 import { RegisterComponent } from '@components/register/register.component';
 import { SessionComponent } from '@components/session/session.component';
 import { sessionGuard } from 'src/guards/session.guard';
+import { HeaderComponent } from '@components/header/header.component';
 
 const routes: Routes = [
     {path:"auth", component:SessionComponent,
@@ -12,7 +13,7 @@ const routes: Routes = [
             {path: 'register', component:RegisterComponent}
         ]
     },
-    {path:"home", component:AppComponent, canActivate:[sessionGuard]},
+    {path:"home", component:HeaderComponent, canActivate:[sessionGuard]},
     {path:"", redirectTo:'/auth', pathMatch:"full"}
 
 ];
