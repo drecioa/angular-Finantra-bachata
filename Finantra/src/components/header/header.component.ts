@@ -11,6 +11,11 @@ import { Router } from '@angular/router';
   styleUrl: './header.component.css'
 })
 export class HeaderComponent {
+  page:string = 'home';
+
+  setPage(page:string):void {
+    this.page = page;
+  }
   private auth=inject(AuthService);
   private redirect=inject(Router);
   logout():void{
