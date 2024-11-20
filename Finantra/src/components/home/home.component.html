@@ -2,9 +2,9 @@
 <div class="info disFlex flexColsNoWrap">
     <div class="menu disFlex">
         <div class="tipos_registros disFlex">
-            <a href="#" (click)="setTypeInformation('cuentas bancarias')"><p>Cuentas bancarias</p></a>
-            <a href="#" (click)="setTypeInformation('criptomonedas')"><p>Criptomonedas</p></a>
-            <a href="#" (click)="setTypeInformation('acciones')"><p>Acciones</p></a>
+            <a (click)="setTypeInformation('cuentas bancarias')"><p>Cuentas bancarias</p></a>
+            <a (click)="setTypeInformation('criptomonedas')"><p>Criptomonedas</p></a>
+            <a (click)="setTypeInformation('acciones')"><p>Acciones</p></a>
         </div>
         <div class="search_bar">
             <input type="text" class="search_text" [(ngModel)]="infoName" placeholder="Nombre">

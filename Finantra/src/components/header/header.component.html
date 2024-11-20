@@ -5,7 +5,7 @@
             <h1>Welcome,</h1>
             <h3> Jhon Doe</h3>
         </div>
-        <div class="disFlex options">
+        <div class="disFlex options"><!--(click)="setPage('home')"-->
             <span class="material-symbols-outlined" (click)="setPage('home')">home</span>
             <span class="material-symbols-outlined" (click)="setPage('statistic')">insert_chart</span>
             <span class="material-symbols-outlined" (click)="setPage('add')">add_circle</span>
@@ -28,7 +28,7 @@
         <p>Estadisticas</p>
     }
     @case ('add') {
-        <p>Añadir</p>
+        <app-form-banco></app-form-banco>
     }
     @case ('news') {
         <p>Noticias</p>
