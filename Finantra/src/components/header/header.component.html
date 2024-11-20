@@ -6,11 +6,11 @@
             <h3> Jhon Doe</h3>
         </div>
         <div class="disFlex options">
-            <span class="material-symbols-outlined" (click)="setPage('home')">home</span>
-            <span class="material-symbols-outlined" (click)="setPage('statistic')">insert_chart</span>
-            <span class="material-symbols-outlined" (click)="setPage('add')">add_circle</span>
-            <span class="material-symbols-outlined" (click)="setPage('news')">breaking_news</span>
-            <span class="material-symbols-outlined" (click)="setPage('user account')">account_circle</span>
+            <span class="material-symbols-outlined home" routerLink="" >home</span>
+            <span class="material-symbols-outlined" routerLink="stats" routerLinkActive="selected">insert_chart</span>
+            <span class="material-symbols-outlined" routerLink="create" routerLinkActive="selected">add_circle</span>
+            <span class="material-symbols-outlined" routerLink="news" routerLinkActive="selected">breaking_news</span>
+            <span class="material-symbols-outlined" routerLinkActive="selected">account_circle</span> <!--Falta aqui un routerLink-->
         </div>
     </div>
     <div class="disFlex centradoFlex chart">
@@ -20,21 +20,5 @@
         <span class="material-symbols-outlined" (click)="logout()">logout</span>
     </div>
 </div>
-@switch (this.page) {
-    @case ('home') {
-        <app-home></app-home>
-    }
-    @case ('statistic') {
-        <p>Estadisticas</p>
-    }
-    @case ('add') {
-        <p>Añadir</p>
-    }
-    @case ('news') {
-        <p>Noticias</p>
-    }
-    @case ('user account') {
-        <p>Cuenta de usuario</p>
-    }
-}
-<!--<router-outlet></router-outlet>-->
+
+<router-outlet></router-outlet>
