@@ -6,6 +6,10 @@ import { SessionComponent } from '@components/session/session.component';
 import { homeGuard, sessionGuard } from 'src/guards/session.guard';
 import { HeaderComponent } from '@components/header/header.component';
 import { SessionMainPageComponent } from '@components/session/session-main-page/session-main-page.component';
+import { HomeComponent } from '@components/home/home.component';
+import { EstadisticaComponent } from '@components/estadistica/estadistica.component';
+import { NewsComponent } from '@components/news/news.component';
+import { AddNewComponent } from '@components/add-new/add-new.component';
 
 const routes: Routes = [
     {path:"auth", component:SessionComponent,
@@ -16,7 +20,15 @@ const routes: Routes = [
         ],
         canActivate:[sessionGuard]
     },
-    {path:"home", component:HeaderComponent, canActivate:[homeGuard], title:'Finantra'},
+    {path:"home", component:HeaderComponent,
+        children:[
+            {path: "", component:HomeComponent, title:"Cuentas"},
+            {path: "stats", component:EstadisticaComponent, title:"Estadistica"},
+            {path: "create", component: AddNewComponent, title:"Añadir"},
+            {path: "news", component: NewsComponent, title: "Noticias"},
+        ],
+        canActivate:[homeGuard], 
+        title:'Finantra'},
     {path:"", redirectTo:'/auth', pathMatch:"full"},
     {path: "**", redirectTo:'/home'}
 
