@@ -18,6 +18,10 @@ h1{
     color: #09f;
 }
 
+h1, h2, h3{
+    cursor: default;
+}
+
 a{
     width: max-content;
     color: #09f;
