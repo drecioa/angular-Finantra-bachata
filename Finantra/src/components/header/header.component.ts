@@ -11,6 +11,7 @@ import { UtilsService } from '@services/utilsService/utils.service';
 })
 export class HeaderComponent {
   constructor (private util:UtilsService){}
+
   logout():void{
     this.util.auth.logout();
     this.util.redirect.navigate(["/auth"]);
