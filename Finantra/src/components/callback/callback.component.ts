@@ -12,12 +12,11 @@ export class CallbackComponent implements OnInit{
   constructor(private route: ActivatedRoute) {}
 
   ngOnInit(): void {
-    // Captura el parámetro `code` de la URL
     this.route.queryParams.subscribe(params => {
       this.code = params['code'] || null;
       if (this.code) {
-        console.log('Código recibido:', this.code);
-        // Aquí puedes hacer una llamada HTTP o cualquier otra acción con el código recibido
+        console.log('Código recibido');
+        
       } else {
         console.log('No se recibió código');
       }

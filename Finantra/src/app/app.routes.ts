@@ -10,6 +10,7 @@ import { HomeComponent } from '@components/home/home.component';
 import { EstadisticaComponent } from '@components/estadistica/estadistica.component';
 import { NewsComponent } from '@components/news/news.component';
 import { AddNewComponent } from '@components/add-new/add-new.component';
+import { CallbackComponent } from '@components/callback/callback.component';
 
 const routes: Routes = [
     {path:"auth", component:SessionComponent,
@@ -29,7 +30,7 @@ const routes: Routes = [
         ],
         canActivate:[homeGuard], 
         title:'Finantra'},
-    {path:"", redirectTo:'callback', component: CallBackComponent},
+    {path:"callback", component: CallbackComponent},
     {path:"", redirectTo:'/auth', pathMatch:"full"},
     {path: "**", redirectTo:'/home'}
 
