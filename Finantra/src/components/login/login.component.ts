@@ -32,6 +32,7 @@ export class LoginComponent {
             firstName: data.data.firstName,
             lastName: data.data.lastName,
             email: data.data.email,
+            password:this.form.get('password')?.value
           };
           this.util.auth.login(user);
           this.util.redirect.navigate(["/home"]);
