@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormsModule, NgForm } from '@angular/forms';
 import { User } from '@models/User';
 import { UpdateService } from '@services/updateService/update-service.service';
@@ -11,19 +11,14 @@ import { UtilsService } from '@services/utilsService/utils.service';
   templateUrl: './user-update.component.html',
   styleUrl: './user-update.component.css'
 })
-export class UserUpdateComponent {
+export class UserUpdateComponent implements OnInit{
   protected user:User={
     firstName:"",
     lastName:"",
     email:"",
     password:""
   }
-  constructor(private update:UpdateService, private util:UtilsService){
-    const userFromStorage=sessionStorage.getItem("user");
-    if(userFromStorage){
-      this.user=JSON.parse(userFromStorage);
-    }
-  }
+  constructor(private update:UpdateService, private util:UtilsService){}
 
   updateUserMethod(form:NgForm):void{
     const userAux:User=form.value;
@@ -32,7 +27,6 @@ export class UserUpdateComponent {
       (response)=>{
         console.log(response);
         this.util.auth.login(userAux);
-        this.user=userAux;
       },
       (error)=>{
         console.log(error);
@@ -40,4 +34,12 @@ export class UserUpdateComponent {
     )
   }
 
+
+  ngOnInit(): void {
+      this.util.auth.data.subscribe(
+        (data)=>{
+          this.user= JSON.parse(data);
+        }
+      )
+  }
 }
