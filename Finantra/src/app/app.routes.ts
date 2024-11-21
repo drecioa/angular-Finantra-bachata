@@ -10,7 +10,6 @@ import { HomeComponent } from '@components/home/home.component';
 import { EstadisticaComponent } from '@components/estadistica/estadistica.component';
 import { NewsComponent } from '@components/news/news.component';
 import { AddNewComponent } from '@components/add-new/add-new.component';
-import { FormBancoComponent } from '@components/form-banco/form-banco.component';
 
 const routes: Routes = [
     {path:"auth", component:SessionComponent,
@@ -25,15 +24,12 @@ const routes: Routes = [
         children:[
             {path: "", component:HomeComponent, title:"Cuentas"},
             {path: "stats", component:EstadisticaComponent, title:"Estadistica"},
-            {path: "create", component: AddNewComponent, title:"Añadir",
-                children:[
-                    {path: "connect-to-bank", component:FormBancoComponent, title:"Añadir Banco"}
-                ]
-            },
+            {path: "create", component: AddNewComponent, title:"Añadir"},
             {path: "news", component: NewsComponent, title: "Noticias"},
         ],
         canActivate:[homeGuard], 
         title:'Finantra'},
+    {path:"", redirectTo:'callback', component: CallBackComponent},
     {path:"", redirectTo:'/auth', pathMatch:"full"},
     {path: "**", redirectTo:'/home'}
 

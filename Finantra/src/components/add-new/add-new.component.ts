@@ -10,4 +10,7 @@ import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 })
 export class AddNewComponent {
   
+  redirectToBank(): void {
+    window.location.href = 'http://127.0.0.1:8080/api/v1/bank/auth';
+  }
 }

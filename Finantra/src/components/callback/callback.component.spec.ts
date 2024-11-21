@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { FormBancoComponent } from './form-banco.component';
+import { CallbackComponent } from './callback.component';
 
-describe('FormBancoComponent', () => {
-  let component: FormBancoComponent;
-  let fixture: ComponentFixture<FormBancoComponent>;
+describe('CallbackComponent', () => {
+  let component: CallbackComponent;
+  let fixture: ComponentFixture<CallbackComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [FormBancoComponent]
+      imports: [CallbackComponent]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(FormBancoComponent);
+    fixture = TestBed.createComponent(CallbackComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
