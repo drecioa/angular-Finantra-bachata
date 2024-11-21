@@ -2,29 +2,41 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { BankAccountDTO } from '@models/bank-account-dto';
+import { User } from '@models/User';
 
 @Injectable({
   providedIn: 'root'
 })
 export class BankService {
   private apiUrl = 'http://localhost:8080/api/v1/bank/connect'; // URL de la API
+  protected user: User | null = null; // Asegúrate de que user sea del tipo correcto
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) {
+    // Obtener el usuario de sessionStorage
+    const userFromStorage = sessionStorage.getItem('user');
+    
+    if (userFromStorage) {
+      this.user = JSON.parse(userFromStorage); // Parsear el JSON y asignarlo a la variable user
+    }
+  }
 
-  // Método para realizar el POST con parámetros en la URL y en el cuerpo
-  showSelectionAccount(code: string, email: string, password: string): Observable<any> {
-    // Definimos el cuerpo de la solicitud (email y password)
-    const body = {
-      email: email,
-      password: password
-    };
+  showSelectionAccount(code: string): Observable<any> {
+    if (!this.user) {
+      console.error('No se ha encontrado el usuario en sessionStorage');
+      return new Observable(); 
+    }
 
-    // Configuramos los encabezados (por ejemplo, especificando JSON)
     const headers = new HttpHeaders({
       'Content-Type': 'application/json'
     });
 
-    // Realizamos la petición POST con el parámetro code en la URL y el cuerpo con email y password
+    const body = {
+      email: this.user.email, 
+      password: this.user.password 
+    };
+
     return this.http.post(`${this.apiUrl}?code=${code}`, body, { headers });
   }
+
+  
 }
