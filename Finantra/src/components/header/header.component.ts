@@ -10,6 +10,7 @@ import { User } from '@models/User';
   templateUrl: './header.component.html',
   styleUrl: './header.component.css'
 })
+
 export class HeaderComponent implements OnInit{
   protected user: User={
     lastName: "Doe",
