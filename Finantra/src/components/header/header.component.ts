@@ -14,7 +14,8 @@ export class HeaderComponent {
   protected user: User={
     lastName: "Doe",
     firstName:"Jonh",
-    email:""
+    email:"",
+    password:""
   };
   constructor (private util:UtilsService){
     const userFromStorage = sessionStorage.getItem("user");
