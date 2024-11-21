@@ -10,7 +10,7 @@ export class AuthService {
 
   login(user:User):void{
     sessionStorage.setItem("sessionState", "true");
-    sessionStorage.setItem("user", `${user}`);
+    sessionStorage.setItem("user", `${JSON.stringify(user)}`);
   }
 
   logout():void{
