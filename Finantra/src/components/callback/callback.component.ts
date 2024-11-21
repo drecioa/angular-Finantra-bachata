@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Route, Router } from '@angular/router';
 import { BankService } from '@services/bankService/bank.service';
 import { BankAccountDTO } from '@models/bank-account-dto';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { UtilsService } from '@services/utilsService/utils.service';
 
 @Component({
   selector: 'app-callback',
@@ -17,7 +18,7 @@ export class CallbackComponent implements OnInit{
   bankAccounts: BankAccountDTO[] = []; 
   selectedAccounts: boolean[] = []; 
 
-  constructor(private route: ActivatedRoute, private bankService: BankService) {}
+  constructor(private route: ActivatedRoute, private bankService: BankService, private utils: UtilsService) {}
 
   ngOnInit(): void {
     this.route.queryParams.subscribe(params => {
@@ -48,7 +49,7 @@ export class CallbackComponent implements OnInit{
         this.bankService.saveAccount(selectedAccounts[i]).subscribe(
           (response) => {
             console.log('Cuenta procesada correctamente:', response);
-            
+            this.utils.redirect.navigate(["/home"]);
           },
           (error) => {
             console.error('Error al procesar la cuenta:', error);
