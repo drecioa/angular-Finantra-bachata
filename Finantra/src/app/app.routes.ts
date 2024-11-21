@@ -10,6 +10,7 @@ import { HomeComponent } from '@components/home/home.component';
 import { EstadisticaComponent } from '@components/estadistica/estadistica.component';
 import { NewsComponent } from '@components/news/news.component';
 import { AddNewComponent } from '@components/add-new/add-new.component';
+import { UserUpdateComponent } from '@components/user-update/user-update.component';
 
 const routes: Routes = [
     {path:"auth", component:SessionComponent,
@@ -26,6 +27,7 @@ const routes: Routes = [
             {path: "stats", component:EstadisticaComponent, title:"Estadistica"},
             {path: "create", component: AddNewComponent, title:"Añadir"},
             {path: "news", component: NewsComponent, title: "Noticias"},
+            {path: "account", component:UserUpdateComponent, title:"Configuracion"}
         ],
         canActivate:[homeGuard], 
         title:'Finantra'},
