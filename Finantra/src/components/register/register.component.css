@@ -1,7 +1,7 @@
 section {
   margin: 2% 5%;
   max-width: 900px;
-  width: max-content; 
+  width: 75%; 
   justify-content: space-between;
 }
 
@@ -42,14 +42,6 @@ button{
 
 button:disabled {
   background-color: #ccc;
-}
-
-
-
-.content{
-  width: 50em;
-  flex: 1; 
-  padding: 10px;
 }
 
 .form-group {

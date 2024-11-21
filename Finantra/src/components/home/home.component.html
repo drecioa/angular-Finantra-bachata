@@ -1,18 +1,25 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap">
-<div class="info disFlex flexColsNoWrap">
-    <div class="menu disFlex">
-        <div class="tipos_registros disFlex">
-            <a (click)="setTypeInformation('cuentas bancarias')"><p>Cuentas bancarias</p></a>
-            <a (click)="setTypeInformation('criptomonedas')"><p>Criptomonedas</p></a>
-            <a (click)="setTypeInformation('acciones')"><p>Acciones</p></a>
+<article class="container">
+    <nav class="row">
+        <div class="tipos_registros d-flex col-md-8 col-12">
+            <a href="#" (click)="setTypeInformation('cuentas bancarias')">Cuentas bancarias</a>
+            <a href="#" (click)="setTypeInformation('criptomonedas')">Criptomonedas</a>
+            <a href="#" (click)="setTypeInformation('acciones')">Acciones</a>
         </div>
-        <div class="search_bar">
-            <input type="text" class="search_text" [(ngModel)]="infoName" placeholder="Nombre">
+        <div class="search_bar col-md-4 col-12">
+            <input type="text" [(ngModel)]="infoName" placeholder="Nombre">
             <button class="search_button">
                 <span class="material-symbols-outlined" (click)="search(infoName)">search</span>
             </button>
         </div>
-    </div>
+    </nav>
+</article>
+<router-outlet></router-outlet>
+
+
+<!--borrar-->
+<div class="d-flex flexColsNoWrap">
+
     <div class="infoType disFlex">
         <!-- Esto es para comprobar que funciona el cambio a cuentas bancarias, criptos o acciones -->
         @if (this.typeInformation == 'cuentas bancarias') {
@@ -34,3 +41,4 @@
         }
     </div>
 </div>
+<!--borrar-->

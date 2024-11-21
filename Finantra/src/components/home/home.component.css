@@ -1,67 +1,24 @@
-.info {
-    align-items: center;
-    justify-content: center;
-}
-
-.menu {
-    align-items: center; 
-    justify-content: space-between;
-    gap: 12px; 
-    width: 94%; 
-    border-radius: 5px;
-    padding: 10px; 
-    box-sizing: border-box; 
-}
-
 .tipos_registros {
     flex: 1; 
     justify-content: space-between; 
     align-items: center; 
     gap: 12px; 
-    padding-left: 2%;
-    padding-right: 2%;
-    padding-top: 1%;
-    padding-bottom: 1%;
+    padding: 1% 2%;
     background-color: aliceblue;
     border-radius: 5px;
 }
 
-.tipos_registros p {
-    flex: 1;
-}
-
-.filter {
-    flex: 0; 
-    justify-content: center;
-    align-items: center; 
-    font-size: 30px;
-    line-height: 1;
-    background-color: black;
-    color: white;
-    border-radius: 5px; 
-    padding: 5px;
-}
-
 .search_bar {
     display: flex;
-    flex: 1; 
-    max-width: 400px; 
+    min-width: 5rem; 
     border-radius: 5px;
     overflow: hidden; 
 }
 
-.search_text {
-    flex: 1; 
-    border: none; 
-    padding: 10px 15px; 
-    font-size: 16px; 
-    outline: none; 
-}
-
 .search_button {
-    flex: 0 0 auto; 
     background-color: #007BFF;
     border: none;
+    border-radius: 50%;
     padding: 10px 15px;
     color: #D9D9D9;
     cursor: pointer;
@@ -78,4 +35,17 @@
 
 .search_button .material-symbols-outlined {
     font-size: 20px;
+}
+
+/*??*/
+.filter {
+    flex: 0; 
+    justify-content: center;
+    align-items: center; 
+    font-size: 30px;
+    line-height: 1;
+    background-color: black;
+    color: white;
+    border-radius: 5px; 
+    padding: 5px;
 }
