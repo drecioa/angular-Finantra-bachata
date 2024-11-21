@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { UtilsService } from '@services/utilsService/utils.service';
 import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { User } from '@models/User';
@@ -10,27 +10,26 @@ import { User } from '@models/User';
   templateUrl: './header.component.html',
   styleUrl: './header.component.css'
 })
-export class HeaderComponent {
-  page:string = 'home';
+
+export class HeaderComponent implements OnInit{
   protected user: User={
     lastName: "Doe",
     firstName:"Jonh",
     email:"",
     password:""
   };
-  constructor (private util:UtilsService){
-    const userFromStorage = sessionStorage.getItem("user");
-    if(userFromStorage){
-      this.user= JSON.parse(userFromStorage);
-    }
-  }
+  constructor (private util:UtilsService){}
 
   logout():void{
     this.util.auth.logout();
     this.util.redirect.navigate(["/auth"]);
   }
 
-  setPage(page:string):void {
-    this.page = page;
+  ngOnInit(): void {
+    this.util.auth.data.subscribe(
+      (data)=>{
+        this.user= JSON.parse(data);
+      }
+    );
   }
 }

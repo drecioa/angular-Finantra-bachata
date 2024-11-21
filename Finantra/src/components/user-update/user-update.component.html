@@ -1,0 +1,32 @@
+<section class="container">
+    <div class="row">
+        <form #updateUser="ngForm" (ngSubmit)="updateUserMethod(updateUser)" class="col-md-5 order-md-2 col-12 order-1">
+            <article class="form-group">
+                <label for="firstName">Nombre</label>
+                <input type="text" ngModel name="firstName" id="firstName" [placeholder]="user.firstName" required>
+            </article>
+    
+            <article class="form-group">
+                <label for="lastName">Apellidos</label>
+                <input type="text" ngModel name="lastName" id="lastName" [placeholder]="user.lastName" required>
+            </article>
+    
+            <article class="form-group">
+                <label for="email">Email</label>
+                <input type="email" ngModel name="email" id="email" [placeholder]="user.email" required>
+            </article>
+    
+            <article class="form-group">
+                <label for="password">Password</label>
+                <input type="password" ngModel name="password" id="password" [placeholder]="user.password" required>
+            </article>
+    
+            <button [disabled]="updateUser.invalid" type="submit" class="btn btn-primary">Change</button>
+        </form>
+
+        <article class="col-md-7 order-md-1 col-12 order-2 d-flex centradoFlex ">
+            ?
+        </article>
+    </div>
+    
+</section>
