@@ -5,6 +5,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { UtilsService } from '@services/utilsService/utils.service';
 import { RouterLink } from '@angular/router';
+import { User } from '@models/User';
 
 @Component({
   selector: 'app-login',
@@ -27,7 +28,12 @@ export class LoginComponent {
       this.login.checkUser(this.form.value).subscribe(
         (data)=>{
           console.log(data);
-          this.util.auth.login();
+          const user:User={
+            firstName: data.data.firstName,
+            lastName: data.data.lastName,
+            email: data.data.email,
+          };
+          this.util.auth.login(user);
           this.util.redirect.navigate(["/home"]);
         }, 
         (error)=>{
