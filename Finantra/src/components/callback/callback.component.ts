@@ -25,7 +25,8 @@ export class CallbackComponent implements OnInit{
       if (this.code) {
         this.bankService.showSelectionAccount(this.code).subscribe(
           (response) => {
-            this.bankAccounts = response;
+            console.log('Respuesta completa', response);
+            this.bankAccounts = response.data;
             this.selectedAccounts = new Array(this.bankAccounts.length).fill(false);
           },
           (error) => {
@@ -42,7 +43,18 @@ export class CallbackComponent implements OnInit{
     const selectedAccounts = this.bankAccounts.filter((account, index) => this.selectedAccounts[index]);
 
     if (selectedAccounts.length > 0) {
-      console.log('Cuentas seleccionadas:', selectedAccounts);
+      for (let i = 0; i < selectedAccounts.length; i++) {
+        // Aquí llamamos a la función del servicio para cada cuenta seleccionada
+        this.bankService.saveAccount(selectedAccounts[i]).subscribe(
+          (response) => {
+            console.log('Cuenta procesada correctamente:', response);
+            
+          },
+          (error) => {
+            console.error('Error al procesar la cuenta:', error);
+          }
+        );
+      }
     } else {
       console.log('No se han seleccionado cuentas.');
     }

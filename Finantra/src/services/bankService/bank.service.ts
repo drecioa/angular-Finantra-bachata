@@ -3,13 +3,15 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { BankAccountDTO } from '@models/bank-account-dto';
 import { User } from '@models/User';
+import { LoginDto } from '@models/loginDto';
 
 @Injectable({
   providedIn: 'root'
 })
 export class BankService {
-  private apiUrl = 'http://localhost:8080/api/v1/bank/connect'; // URL de la API
-  protected user: User | null = null; // Asegúrate de que user sea del tipo correcto
+  private apiConnectUrl = 'http://localhost:8080/api/v1/bank/connect'; 
+  private apiSaveUrl = 'http://localhost:8080/api/v1/bank/save'; 
+  protected user: User | null = null; 
 
   constructor(private http: HttpClient) {
     // Obtener el usuario de sessionStorage
@@ -35,8 +37,36 @@ export class BankService {
       password: this.user.password 
     };
 
-    return this.http.post(`${this.apiUrl}?code=${code}`, body, { headers });
+    return this.http.post(`${this.apiConnectUrl}?code=${code}`, body, { headers });
   }
 
+  saveAccount(account:BankAccountDTO): Observable<any> {
+    if (!this.user) {
+      console.error('No se ha encontrado el usuario en sessionStorage');
+      return new Observable(); 
+    }
+
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json'
+    });
+
+    const body = {
+      bankAccountDTO: {
+        accountId: account.accountId,
+        providerId: account.providerId,
+        bankName: account.bankName,
+        iban: account.iban,
+        currency: account.currency,
+        balance: account.balance,
+        notes: account.notes
+      },
+      loginDTO: {
+        email: this.user.email, 
+        password: this.user.password 
+      }
+    };
+
+    return this.http.post(this.apiSaveUrl, body, { headers });
+  }
   
 }

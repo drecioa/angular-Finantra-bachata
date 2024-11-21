@@ -3,8 +3,8 @@
     <ul>
       <li *ngFor="let account of bankAccounts; let i = index">
         <input type="checkbox" [(ngModel)]="selectedAccounts[i]" /> 
-        <p><strong>Banco:</strong> {{ account.bankName }}</p>
-        <p><strong>Nombre de cuenta:</strong> {{ account.iban }}</p>
+        <p><strong>Banco:</strong> {{ account.providerId }}</p>
+        <p><strong>Número de cuenta:</strong> {{ account.iban }}</p>
         <p><strong>Notes:</strong> {{ account.notes }}</p>
       </li>
     </ul>
