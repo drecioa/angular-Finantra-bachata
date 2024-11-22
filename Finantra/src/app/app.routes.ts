@@ -12,6 +12,7 @@ import { NewsComponent } from '@components/news/news.component';
 import { AddNewComponent } from '@components/add-new/add-new.component';
 import { CallbackComponent } from '@components/callback/callback.component';
 import { UserUpdateComponent } from '@components/user-update/user-update.component';
+import { BankAccountComponent } from '@components/bank-account/bank-account.component';
 
 const routes: Routes = [
     {path:"auth", component:SessionComponent,
@@ -24,7 +25,11 @@ const routes: Routes = [
     },
     {path:"home", component:HeaderComponent,
         children:[
-            {path: "", component:HomeComponent, title:"Cuentas"},
+            {path: "", component:HomeComponent,
+                children:[
+                    {path:"bankAccount", component:BankAccountComponent, title:"Cuentas Bancarias"}
+                ],
+                title:"Cuentas"},
             {path: "stats", component:EstadisticaComponent, title:"Estadistica"},
             {path: "create", component: AddNewComponent, title:"Añadir"},
             {path: "news", component: NewsComponent, title: "Noticias"},
