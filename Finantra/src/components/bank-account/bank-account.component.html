@@ -5,7 +5,7 @@
         <article>{{account.notes}}</article>
         <article>{{account.balance}}</article>
 
-        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#edit">Modificar</button>
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#edit" (click)="setTargetAccount(account)">Modificar</button>
         <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#delete">Borrar</button>
     </section>
 
@@ -15,7 +15,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="Edit Account">Editar</h5>
+                    <h5 class="modal-title" id="Edit Account">Editar {{targetAccount.iban}}</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
@@ -35,7 +35,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="Delete Account">Borrar</h5>
+                    <h5 class="modal-title" id="Delete Account">Borrar {{targetAccount.iban}}</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
