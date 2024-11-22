@@ -15,30 +15,3 @@
     </nav>
 </article>
 <router-outlet></router-outlet>
-
-
-<!--borrar-->
-<div class="d-flex flexColsNoWrap">
-
-    <div class="infoType disFlex">
-        <!-- Esto es para comprobar que funciona el cambio a cuentas bancarias, criptos o acciones -->
-        @if (this.typeInformation == 'cuentas bancarias') {
-            <p>Cuentas bancarias</p>
-        } @else {
-            @if (this.typeInformation == 'criptomonedas') {
-                <p>Criptomonedas</p>
-            } @else {
-                <p>Acciones</p>
-            }
-        }
-    </div>
-    <div>
-        <!-- Esto es para comprobar que funciona el buscador -->
-        @if (this.infoName == '') {
-            <p>No se ha buscado</p>
-        } @else {
-            <p>Si se ha buscado</p>
-        }
-    </div>
-</div>
-<!--borrar-->
