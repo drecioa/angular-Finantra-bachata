@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+import { FormsModule, NgForm } from '@angular/forms';
 import { Bank } from '@models/Bank';
 import { BankService } from '@services/bankService/bank.service';
 import { UtilsService } from '@services/utilsService/utils.service';
@@ -7,7 +8,7 @@ import { UtilsService } from '@services/utilsService/utils.service';
 @Component({
   selector: 'app-bank-account',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, FormsModule],
   templateUrl: './bank-account.component.html',
   styleUrl: './bank-account.component.css'
 })
@@ -57,5 +58,29 @@ export class BankAccountComponent implements OnInit{
 
   setTargetAccount(cuenta: Bank):void{
     this.targetAccount=cuenta;
+  }
+
+  onDelete(accountId:string):void{
+    alert("delete function");
+    document.getElementById("miraCierrame2")?.click();
+
+    this.setEmptyTarget();
+  }
+  onUpdate(form: NgForm):void{
+    alert("update function");
+    document.getElementById("miraCierrame")?.click();
+
+    this.setEmptyTarget();
+  }
+
+  setEmptyTarget():void{
+    this.targetAccount={
+      accountId: "",
+      providerId: "",
+      bankName: "",
+      iban: "",
+      currency: "",
+      balance: 0,
+      notes: ""};
   }
 }
