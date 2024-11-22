@@ -1,0 +1,14 @@
+section{
+    margin-top: 1em;
+}
+
+.modal{
+    color: black;
+    inset: 0;
+    margin: auto;
+    width: 50%;
+    height: 50%;
+
+    transition: opacity .15s ease-in-out;
+    z-index: 9999;
+}

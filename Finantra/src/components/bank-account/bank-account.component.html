@@ -1,1 +1,54 @@
-<p>bank-account works!</p>
+@if(accounts.length!=0){
+    <section *ngFor="let account of accounts">
+        <article>{{account.iban}}</article>
+        <article>{{account.bankName}}</article>
+        <article>{{account.notes}}</article>
+        <article>{{account.balance}}</article>
+
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#edit">Modificar</button>
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#delete">Borrar</button>
+    </section>
+
+
+    <!--Editar account-->
+    <div class="modal fade" id="edit" tabindex="-1" aria-labelledby="Edit Account" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="Edit Account">Editar</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    Holaa
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    
+    <!--borrar account-->
+    <div class="modal fade" id="delete" tabindex="-1" aria-labelledby="Delete Account" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="Delete Account">Borrar</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    Holaa
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+}@else {
+    <section>
+        Nada que mostrar!
+    </section>
+}
