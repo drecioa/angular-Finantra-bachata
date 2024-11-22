@@ -6,7 +6,7 @@
         <article>{{account.balance}}</article>
 
         <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#edit" (click)="setTargetAccount(account)">Modificar</button>
-        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#delete">Borrar</button>
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#delete" (click)="setTargetAccount(account)">Borrar</button>
     </section>
 
 
@@ -19,11 +19,25 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    Holaa
+                    <form #updateAccount="ngForm" (ngSubmit)="onUpdate(updateAccount)" class="needs-validation" novalidate>
+                        <article>
+                            <label for="bankName">Nombre del Banco</label>
+                            <input type="text" name="bankName" id="bankName" ngModel required>
+                        </article>
+                        <article>
+                            <label for="notes">Nombre del Banco</label>
+                            <input type="text" name="notes" id="notes" ngModel required>
+                        </article>
+  
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-primary" [disabled]="updateAccount.invalid">
+                                Guardar cambios
+                            </button>
+                            <button type="button" class="btn btn-secondary" id="miraCierrame" data-bs-dismiss="modal">Cerrar</button>
+                        </div>
+                    </form>
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                </div>
+                
             </div>
         </div>
     </div>
@@ -39,10 +53,11 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    Holaa
+                    ¿Seguro que quieres borrar la cuenta con Iban [{{targetAccount.iban}}]?
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                    <button type="button" (click)="onDelete(targetAccount.accountId)">Aceptar</button>
+                    <button type="button" class="btn btn-secondary" id="miraCierrame2" data-bs-dismiss="modal">Cerrar</button>
                 </div>
             </div>
         </div>
