@@ -2,6 +2,9 @@ section{
     margin-top: 1em;
 }
 
+label{
+    color: black;
+}
 .modal{
     color: black;
     inset: 0;
