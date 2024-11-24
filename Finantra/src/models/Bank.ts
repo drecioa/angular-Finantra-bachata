@@ -4,6 +4,6 @@ export interface Bank{
     bankName: string,
     iban: string,
     currency: string,
-    balance: Number,
+    balance: number,
     notes: string
 }
