@@ -5,6 +5,7 @@ import { BankAccountDTO } from '@models/bank-account-dto';
 import { User } from '@models/User';
 import { LoginDto } from '@models/loginDto';
 import { Bank } from '@models/Bank';
+import { map } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -20,11 +21,10 @@ export class BankService {
   protected user: User | null = null; 
   
   constructor(private http: HttpClient) {
-    // Obtener el usuario de sessionStorage
     const userFromStorage = sessionStorage.getItem('user');
     
     if (userFromStorage) {
-      this.user = JSON.parse(userFromStorage); // Parsear el JSON y asignarlo a la variable user
+      this.user = JSON.parse(userFromStorage); 
     }
   }
 
@@ -73,6 +73,26 @@ export class BankService {
     };
 
     return this.http.post(this.apiSaveUrl, body, { headers });
+  }
+
+  getAllAccounts(): Observable<BankAccountDTO[]> {
+    if (!this.user || !this.user.password) {
+      console.error('La contraseña no está disponible.');
+      return new Observable(); 
+    }
+
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json'
+    });
+
+    const body = {
+        email: this.user.email, 
+        password: this.user.password 
+    };
+
+    return this.http.post<any>(this.apiGetUrl, body, { headers }).pipe(
+      map(response => response.data as BankAccountDTO[])
+    );
   }
   
   getAccounts(login: LoginDto): Observable<any>{

@@ -2,11 +2,12 @@ import { Component, inject, OnInit } from '@angular/core';
 import { UtilsService } from '@services/utilsService/utils.service';
 import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { User } from '@models/User';
+import { EstadisticaGeneralComponent } from '@components/estadistica-general/estadistica-general.component';
 
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [RouterLink, RouterLinkActive, RouterOutlet],
+  imports: [RouterLink, RouterLinkActive, RouterOutlet, EstadisticaGeneralComponent],
   templateUrl: './header.component.html',
   styleUrl: './header.component.css'
 })
