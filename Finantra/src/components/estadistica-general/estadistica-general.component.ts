@@ -1,5 +1,7 @@
 import { Component, AfterViewInit  } from '@angular/core';
 import { Chart, ChartType } from 'chart.js/auto';
+import { BankService } from '@services/bankService/bank.service';
+import { BankAccountDTO } from '@models/bank-account-dto';
 
 @Component({
   selector: 'app-estadistica-general',
@@ -10,8 +12,27 @@ import { Chart, ChartType } from 'chart.js/auto';
 })
 export class EstadisticaGeneralComponent implements AfterViewInit {
   public chart: Chart | undefined;
+  private accounts: BankAccountDTO[] = [];
+
+  constructor(private bankService: BankService) {}
 
   ngAfterViewInit(): void {
+    this.bankService.getAllAccounts().subscribe(
+      (dataBank: BankAccountDTO[]) => {
+        this.accounts = dataBank;
+        console.log('Cuentas bancarias:', this.accounts);
+
+        const totalBalance = dataBank.reduce((sum, account) => sum + account.balance, 0);
+        this.createChart(totalBalance);
+      },
+      (error) => {
+        console.error('Error al obtener las cuentas bancarias:', error);
+      }
+    );
+    
+  }
+
+  createChart (dataBank) {
     const canvas = document.getElementById("chart-general") as HTMLCanvasElement;
     if (canvas) {
       const ctx = canvas.getContext("2d");
@@ -21,7 +42,7 @@ export class EstadisticaGeneralComponent implements AfterViewInit {
           datasets: [
             {
               label: 'General',
-              data: [300, 50],
+              data: [dataBank, 50],
               backgroundColor: [
                 'rgb(255, 99, 132)',
                 'rgb(54, 162, 235)'
