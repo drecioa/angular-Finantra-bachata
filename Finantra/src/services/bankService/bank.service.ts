@@ -3,7 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { BankAccountDTO } from '@models/bank-account-dto';
 import { User } from '@models/User';
-import { LoginDto } from '@models/loginDto';
+import { map } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -11,14 +11,14 @@ import { LoginDto } from '@models/loginDto';
 export class BankService {
   private apiConnectUrl = 'http://localhost:8080/api/v1/bank/connect'; 
   private apiSaveUrl = 'http://localhost:8080/api/v1/bank/save'; 
+  private apiGetAllUrl = 'http://localhost:8080/api/v1/bank/accounts';
   protected user: User | null = null; 
 
   constructor(private http: HttpClient) {
-    // Obtener el usuario de sessionStorage
     const userFromStorage = sessionStorage.getItem('user');
     
     if (userFromStorage) {
-      this.user = JSON.parse(userFromStorage); // Parsear el JSON y asignarlo a la variable user
+      this.user = JSON.parse(userFromStorage); 
     }
   }
 
@@ -67,6 +67,26 @@ export class BankService {
     };
 
     return this.http.post(this.apiSaveUrl, body, { headers });
+  }
+
+  getAllAccounts(): Observable<BankAccountDTO[]> {
+    if (!this.user || !this.user.password) {
+      console.error('La contraseña no está disponible.');
+      return new Observable(); 
+    }
+
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json'
+    });
+
+    const body = {
+        email: this.user.email, 
+        password: this.user.password 
+    };
+
+    return this.http.post<any>(this.apiGetAllUrl, body, { headers }).pipe(
+      map(response => response.data as BankAccountDTO[])
+    );
   }
   
 }
