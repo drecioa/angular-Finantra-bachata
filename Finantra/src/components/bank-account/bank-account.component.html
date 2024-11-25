@@ -1,9 +1,9 @@
 @if(accounts.length!=0){
     <section *ngFor="let account of accounts">
-        <article>{{account.iban}}</article>
-        <article>{{account.bankName}}</article>
-        <article>{{account.notes}}</article>
-        <article>{{account.balance}}</article>
+        <article>Iban: {{account.iban}}</article>
+        <article>BankName: {{account.bankName}}</article>
+        <article>Notas: {{account.notes}}</article>
+        <article>Balance: {{account.balance}}</article>
 
         <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#edit" (click)="setTargetAccount(account)">Modificar</button>
         <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#delete" (click)="setTargetAccount(account)">Borrar</button>
@@ -11,7 +11,7 @@
 
 
     <!--Editar account-->
-    <div class="modal fade" id="edit" tabindex="-1" aria-labelledby="Edit Account" aria-hidden="true">
+    <div class="modal fade" id="edit" tabindex="-1">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -22,15 +22,15 @@
                     <form #updateAccount="ngForm" (ngSubmit)="onUpdate(updateAccount)" class="needs-validation" novalidate>
                         <article>
                             <label for="bankName">Nombre del Banco</label>
-                            <input type="text" name="bankName" id="bankName" ngModel required>
+                            <input type="text" name="bankName" id="bankName" ngModel required class="form-control" [value]="targetAccount.bankName">
                         </article>
                         <article>
-                            <label for="notes">Nombre del Banco</label>
-                            <input type="text" name="notes" id="notes" ngModel required>
+                            <label for="notes">Notas</label>
+                            <input type="text" name="notes" id="notes" ngModel required class="form-control" [value]="targetAccount.notes">
                         </article>
   
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-primary" [disabled]="updateAccount.invalid">
+                            <button type="submit" class="btn btn-primary" [disabled]="updateAccount.invalid">
                                 Guardar cambios
                             </button>
                             <button type="button" class="btn btn-secondary" id="miraCierrame" data-bs-dismiss="modal">Cerrar</button>
@@ -45,7 +45,7 @@
 
     
     <!--borrar account-->
-    <div class="modal fade" id="delete" tabindex="-1" aria-labelledby="Delete Account" aria-hidden="true">
+    <div class="modal fade" id="delete" tabindex="-1">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
