@@ -2,7 +2,7 @@
 <article class="container">
     <nav class="row">
         <div class="tipos_registros d-flex col-md-8 col-12">
-            <a href="#" (click)="setTypeInformation('cuentas bancarias')">Cuentas bancarias</a>
+            <a routerLink="bankAccount" routerLinkActive="active">Cuentas bancarias</a>
             <a href="#" (click)="setTypeInformation('criptomonedas')">Criptomonedas</a>
             <a href="#" (click)="setTypeInformation('acciones')">Acciones</a>
         </div>
@@ -15,30 +15,3 @@
     </nav>
 </article>
 <router-outlet></router-outlet>
-
-
-<!--borrar-->
-<div class="d-flex flexColsNoWrap">
-
-    <div class="infoType disFlex">
-        <!-- Esto es para comprobar que funciona el cambio a cuentas bancarias, criptos o acciones -->
-        @if (this.typeInformation == 'cuentas bancarias') {
-            <p>Cuentas bancarias</p>
-        } @else {
-            @if (this.typeInformation == 'criptomonedas') {
-                <p>Criptomonedas</p>
-            } @else {
-                <p>Acciones</p>
-            }
-        }
-    </div>
-    <div>
-        <!-- Esto es para comprobar que funciona el buscador -->
-        @if (this.infoName == '') {
-            <p>No se ha buscado</p>
-        } @else {
-            <p>Si se ha buscado</p>
-        }
-    </div>
-</div>
-<!--borrar-->
