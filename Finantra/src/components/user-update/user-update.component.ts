@@ -1,16 +1,21 @@
+import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormsModule, NgForm } from '@angular/forms';
+import { Topic } from '@models/Topic';
 import { User } from '@models/User';
+import { NewsService } from '@services/newsService/news-service.service';
 import { UpdateService } from '@services/updateService/update-service.service';
 import { UtilsService } from '@services/utilsService/utils.service';
+
 
 @Component({
   selector: 'app-user-update',
   standalone: true,
-  imports: [FormsModule],
+  imports: [FormsModule, CommonModule],
   templateUrl: './user-update.component.html',
   styleUrl: './user-update.component.css'
 })
+
 export class UserUpdateComponent implements OnInit{
   protected user:User={
     firstName:"",
@@ -18,7 +23,10 @@ export class UserUpdateComponent implements OnInit{
     email:"",
     password:""
   }
-  constructor(private update:UpdateService, private util:UtilsService){}
+
+  protected topics:Topic[]=[];
+
+  constructor(private update:UpdateService, private util:UtilsService, private newsService:NewsService){}
 
   updateUserMethod(form:NgForm):void{
     const userAux:User=form.value;
@@ -41,5 +49,14 @@ export class UserUpdateComponent implements OnInit{
           this.user= JSON.parse(data);
         }
       )
+
+      this.newsService.getTopics().subscribe(
+        (data)=>{
+          this.topics=data.data;
+        }, (error)=>{console.error(error);
+        }
+      )
   }
+
+
 }
