@@ -5,6 +5,7 @@ import { CryptoService } from '@services/crypto/crypto.service';
 import { CommonModule } from '@angular/common';
 import { CryptoDto } from '@models/crypto-dto';
 import { UtilsService } from '@services/utilsService/utils.service';
+import { of } from 'rxjs';
 
 @Component({
   selector: 'app-crypto-form',
@@ -26,10 +27,16 @@ export class CryptoFormComponent implements OnInit {
   ngOnInit(): void {
     this.searchControl.valueChanges.pipe(
       distinctUntilChanged(),
-      switchMap((query) => this.cryptoService.searchCryptos(query || ''))
+      switchMap((query) => {
+        // Verificar si el valor del query está vacío
+        if (!query.trim()) {
+          return of([]); 
+        }
+        return this.cryptoService.searchCryptos(query);
+      })
     ).subscribe({
       next: (results) => (this.searchResults = results),
-      error: (err) => console.error("No se encontrarón cryptos con ese nombre: ", err),
+      error: (err) => console.error("No se encontraron cryptos con ese nombre: ", err),
     });
   }
 
