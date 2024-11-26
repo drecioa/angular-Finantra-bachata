@@ -12,6 +12,7 @@ import { NewsComponent } from '@components/news/news.component';
 import { AddNewComponent } from '@components/add-new/add-new.component';
 import { CallbackComponent } from '@components/callback/callback.component';
 import { UserUpdateComponent } from '@components/user-update/user-update.component';
+import { CryptoFormComponent } from '@components/crypto-form/crypto-form.component';
 
 const routes: Routes = [
     {path:"auth", component:SessionComponent,
@@ -26,7 +27,11 @@ const routes: Routes = [
         children:[
             {path: "", component:HomeComponent, title:"Cuentas"},
             {path: "stats", component:EstadisticaComponent, title:"Estadistica"},
-            {path: "create", component: AddNewComponent, title:"Añadir"},
+            {path: "create", component: AddNewComponent,
+                children:[
+                    {path: "crypto", component: CryptoFormComponent, title:"Crypto Search"}
+                ], 
+                title:"Añadir"},
             {path: "news", component: NewsComponent, title: "Noticias"},
             {path: "account", component:UserUpdateComponent, title:"Configuracion"}
         ],
