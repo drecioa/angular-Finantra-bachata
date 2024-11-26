@@ -1,0 +1,17 @@
+section{
+    margin-top: 1em;
+}
+
+label{
+    color: black;
+}
+.modal{
+    color: black;
+    inset: 0;
+    margin: auto;
+    width: 50%;
+    height: max-content;
+
+    transition: opacity .15s ease-in-out;
+    z-index: 9999;
+}
