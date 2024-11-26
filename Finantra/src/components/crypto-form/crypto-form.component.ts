@@ -28,7 +28,6 @@ export class CryptoFormComponent implements OnInit {
     this.searchControl.valueChanges.pipe(
       distinctUntilChanged(),
       switchMap((query) => {
-        // Verificar si el valor del query está vacío
         if (!query.trim()) {
           return of([]); 
         }
