@@ -16,6 +16,10 @@ export class CryptoWalletComponent implements OnInit {
   constructor(private cryptoService: CryptoService) { }
 
   ngOnInit(): void {
+    this.loadCryptos(); 
+  }
+
+  loadCryptos(): void {
     this.cryptoService.getAllCryptos().subscribe(
       (response) => {
         this.cryptos = response;
@@ -27,6 +31,18 @@ export class CryptoWalletComponent implements OnInit {
       }, (error) => {
         console.error("No se pudo conectar con las cryptos del usuario: ", error);
       }
-    )
+    );
+  }
+
+  deleteCrypto(coinId: string): void {
+    this.cryptoService.deleteCrypto(coinId).subscribe(
+      (response) => {
+        console.log('Criptomoneda eliminada:', response);
+        this.loadCryptos();  
+      },
+      (error) => {
+        console.error('Error al eliminar la criptomoneda:', error);
+      }
+    );
   }
 }

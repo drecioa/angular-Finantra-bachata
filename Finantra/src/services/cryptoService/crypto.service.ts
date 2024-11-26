@@ -14,6 +14,7 @@ export class CryptoService {
   private apiSearchUrl = 'http://localhost:8080/api/v1/crypto/search?query=';
   private apiSaveUrl = 'http://localhost:8080/api/v1/crypto/add';
   private apiGetAllUrl = 'http://localhost:8080/api/v1/crypto';
+  private apiDeleteUrl = 'http://localhost:8080/api/v1/crypto/delete/';
 
   protected user: User | null = null; 
 
@@ -75,5 +76,26 @@ export class CryptoService {
         return of([]);
       })
     );
+  }
+
+  deleteCrypto (coinId:string): Observable<any> {
+    if (!this.user) {
+      console.error('No se ha encontrado el usuario en sessionStorage');
+      return new Observable(); 
+    }
+
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json'
+    });
+
+    const body = {
+      email: this.user.email, 
+      password: this.user.password
+    };
+
+    return this.http.post(`${this.apiDeleteUrl}${coinId}`, body, { headers }).pipe(
+          catchError((error) => {
+          console.error('Error al eliminar la criptomoneda:', error);
+          return of(null); }));
   }
 }

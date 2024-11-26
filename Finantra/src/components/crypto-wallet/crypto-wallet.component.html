@@ -14,7 +14,7 @@
     
         <div class="d-flex flex-column">
           <button class="btn btn-primary mb-2">Modificar</button>
-          <button class="btn btn-danger">Borrar</button>
+          <button class="btn btn-danger" (click)="deleteCrypto(crypto.id)">Borrar</button>
         </div>
     </section>
 } @else {
