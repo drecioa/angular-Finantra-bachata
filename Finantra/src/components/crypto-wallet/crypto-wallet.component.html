@@ -1,0 +1,24 @@
+@if (this.cryptos.length != 0) {
+    <section *ngFor="let crypto of cryptos" class="d-flex flex-row align-items-center border rounded p-3 mb-3">
+        <div class="flex-grow-1">
+          <article><strong>Name:</strong> {{ crypto.name }}</article>
+          <article><strong>Symbol:</strong> {{ crypto.symbol }}</article>
+          <article><strong>Current price:</strong> {{ crypto.currentPrice }}</article>
+          <article><strong>Amount:</strong> {{ crypto.amount }}</article>
+          <article><strong>Total value:</strong> {{ crypto.totalValue }}</article>
+        </div>
+    
+        <div class="me-3">
+          <img [src]="crypto.image" [alt]="'Image of ' + crypto.name" class="img-fluid rounded" style="max-width: 150px;" />
+        </div>
+    
+        <div class="d-flex flex-column">
+          <button class="btn btn-primary mb-2">Modificar</button>
+          <button class="btn btn-danger">Borrar</button>
+        </div>
+    </section>
+} @else {
+    <section>
+        Nada que mostrar!
+    </section>
+}

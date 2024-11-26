@@ -14,6 +14,7 @@ import { CallbackComponent } from '@components/callback/callback.component';
 import { UserUpdateComponent } from '@components/user-update/user-update.component';
 import { CryptoFormComponent } from '@components/crypto-form/crypto-form.component';
 import { BankAccountComponent } from '@components/bank-account/bank-account.component';
+import { CryptoWalletComponent } from '@components/crypto-wallet/crypto-wallet.component';
 
 const routes: Routes = [
     {path:"auth", component:SessionComponent,
@@ -28,7 +29,8 @@ const routes: Routes = [
         children:[
             {path: "", component:HomeComponent,
                 children:[
-                    {path:"bankAccount", component:BankAccountComponent, title:"Cuentas Bancarias"}
+                    {path:"bankAccount", component:BankAccountComponent, title:"Cuentas Bancarias"},
+                    {path:"cryptoWallet", component:CryptoWalletComponent, title: "Cryptomonedas"}
                 ],
                 title:"Cuentas"},
             {path: "stats", component:EstadisticaComponent, title:"Estadistica"},

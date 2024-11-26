@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
-import { CryptoService } from '@services/crypto/crypto.service';
+import { CryptoService } from '@services/cryptoService/crypto.service';
 import { CommonModule } from '@angular/common';
 import { CryptoDto } from '@models/crypto-dto';
 import { UtilsService } from '@services/utilsService/utils.service';
