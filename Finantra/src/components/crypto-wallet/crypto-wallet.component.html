@@ -13,10 +13,29 @@
         </div>
     
         <div class="d-flex flex-column">
-          <button class="btn btn-primary mb-2">Modificar</button>
+          <button class="btn btn-primary mb-2" (click)="selectCryptoForEdit(crypto)">Añadir</button>
           <button class="btn btn-danger" (click)="deleteCrypto(crypto.id)">Borrar</button>
         </div>
     </section>
+
+    <div *ngIf="showAmountInput" class="modal fade show" id="modifyCryptoModal" tabindex="-1" style="display: block;" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content" style="color: black;"> <!-- Se aplica el color negro a todo el contenido -->
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Modificar Crypto</h5>
+              <button type="button" class="btn-close" (click)="showAmountInput = false" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <p>Seleccionaste: {{ selectedCrypto?.name }} ({{ selectedCrypto?.symbol }})</p>
+              <input type="number" #amount class="form-control" placeholder="Introduce la cantidad" />
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" (click)="showAmountInput = false" data-bs-dismiss="modal">Cerrar</button>
+              <button type="button" class="btn btn-primary" (click)="addCrypto(selectedCrypto?.id, amount.value)">Añadir</button>
+            </div>
+          </div>
+        </div>
+    </div>  
 } @else {
     <section>
         Nada que mostrar!

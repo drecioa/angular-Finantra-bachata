@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CryptoService } from '@services/cryptoService/crypto.service';
 import { CommonModule } from '@angular/common';
 import { Crypto } from '@models/crypto';
+import { UtilsService } from '@services/utilsService/utils.service';
 
 @Component({
   selector: 'app-crypto-wallet',
@@ -12,8 +13,10 @@ import { Crypto } from '@models/crypto';
 })
 export class CryptoWalletComponent implements OnInit {
   public cryptos: Crypto[] = [];
+  public selectedCrypto: Crypto | null = null;  
+  public showAmountInput: boolean = false;
 
-  constructor(private cryptoService: CryptoService) { }
+  constructor(private cryptoService: CryptoService, utils: UtilsService) { }
 
   ngOnInit(): void {
     this.loadCryptos(); 
@@ -34,6 +37,11 @@ export class CryptoWalletComponent implements OnInit {
     );
   }
 
+  selectCryptoForEdit(crypto: Crypto): void {
+    this.selectedCrypto = crypto;
+    this.showAmountInput = true;  
+  }
+
   deleteCrypto(coinId: string): void {
     this.cryptoService.deleteCrypto(coinId).subscribe(
       (response) => {
@@ -42,6 +50,21 @@ export class CryptoWalletComponent implements OnInit {
       },
       (error) => {
         console.error('Error al eliminar la criptomoneda:', error);
+      }
+    );
+  }
+
+  addCrypto (coinId:string, amount:string) {
+    const parameters = `?coinId=${coinId}&amount=${Number(amount)}`;
+    this.cryptoService.saveCrypto(parameters).subscribe(
+      (response) => {
+        console.log('Crypto procesada correctamente:', response);
+        this.loadCryptos(); 
+        this.showAmountInput = false;  
+        this.selectedCrypto = null; 
+      },
+      (error) => {
+        console.error('Error al procesar la crypto:', error);
       }
     );
   }
