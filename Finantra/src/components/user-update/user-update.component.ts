@@ -34,7 +34,7 @@ export class UserUpdateComponent implements OnInit{
   updateUserMethod(form:NgForm):void{
     const userAux:User=form.value;
 
-    this.update.updateUser(this.user.email, userAux).subscribe(
+    this.update.updateUser(new LoginDto(this.user.email, this.user.password), userAux).subscribe(
       (response)=>{
         console.log(response);
         this.util.auth.login(userAux);
