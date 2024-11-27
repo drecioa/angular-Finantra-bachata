@@ -1,0 +1,54 @@
+<section class="container">
+    <div class="row">
+        <form #updateUser="ngForm" (ngSubmit)="updateUserMethod(updateUser)" class="col-md-5 order-md-2 col-12 order-1">
+            <article class="form-group">
+                <label for="firstName">Nombre</label>
+                <input type="text" ngModel name="firstName" id="firstName" [placeholder]="user.firstName" required>
+            </article>
+    
+            <article class="form-group">
+                <label for="lastName">Apellidos</label>
+                <input type="text" ngModel name="lastName" id="lastName" [placeholder]="user.lastName" required>
+            </article>
+    
+            <article class="form-group">
+                <label for="email">Email</label>
+                <input type="email" ngModel name="email" id="email" [placeholder]="user.email" required>
+            </article>
+    
+            <article class="form-group">
+                <label for="password">Password</label>
+                <input type="password" ngModel name="password" id="password" [placeholder]="user.password" required>
+            </article>
+    
+            <button [disabled]="updateUser.invalid" type="submit" class="btn btn-primary">Change</button>
+        </form>
+        <article class="col-md-7 order-md-1 mt-md-0 mt-5 col-12 order-2 px-5">
+            <section class="d-flex px-0">
+                <input type="text" id="newTopic" #newTopicInput class="form-control flex1" placeholder="busca aqui temas..." list="temas">
+                <button class="btn btn-secondary" (click)="addTopicToList(newTopicInput.value)">+</button>
+            </section>
+            <hr>
+            <h2>Tus temas de interés</h2>
+
+            <article class="d-flex flexRowsWrap gap-2 topicContainer">
+                @if(listTopic.length!=0){
+                    <div class="bubble" *ngFor="let topico of listTopic" (click)="deleteTopicOfList(topico.name)">
+                        {{topico.name}}
+                    </div>
+                }@else {
+                    <div class="info">Aun no tienes ningun tema de interes >w&lt;</div>
+                }
+
+            </article>
+            <hr>
+            <button class="btn btn-primary mt-3" (click)="saveTopics()">Guardar Preferencias</button>
+        </article>
+    </div>
+    
+</section>
+
+
+<datalist id="temas">
+    <option *ngFor="let topic of topics" [value]="topic.name"></option>
+</datalist>

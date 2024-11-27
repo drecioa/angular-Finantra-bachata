@@ -2,6 +2,9 @@
     box-sizing: border-box;
     margin: 0;
 }
+nav{
+    width: 100%;
+}
 body {
     box-sizing: border-box;
     background-color: #092E46;
@@ -42,6 +45,10 @@ h1{
     color: #09f;
 }
 
+h1, h2, h3{
+    cursor: default;
+}
+
 a{
     width: max-content;
     color: #09f;
@@ -69,6 +76,7 @@ label {
 
 input{
     width: 100%;
+    min-width: 2em;
     border-radius: 10px;
     text-align: center;
     color: rgb(209, 209, 209);

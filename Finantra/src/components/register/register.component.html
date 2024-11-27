@@ -1,38 +1,37 @@
-<section class="register-container disFlex flexColsNoWrap selfAlign">
-    <h1>Register</h1>
-    <ng-container *ngIf="registerStatus" class="error">
-        <p>{{ registerStatus }}</p>
-    </ng-container>
-    <form [formGroup]="registerForm" (ngSubmit)="submitRegister()" method="post" class="disFlex flexRowsWrap gap20">
-        <article class="disFlex flexRowsWrap">
-            <div class="content">
-                <div class="form-group">
-                    <label for="email">Email</label>
-                    <input type="email" id="email" formControlName="email" required>
-                </div>
+<section class="register-container d-flex flexColsNoWrap selfAlign">
+    <div class="row">
+        <h1 class="col-12">Register</h1>
+        <ng-container *ngIf="registerStatus" class="error col-12">
+            <p>{{ registerStatus }}</p>
+        </ng-container>
+    </div>
+
+    <form [formGroup]="registerForm" (ngSubmit)="submitRegister()" method="post" class="d-flex gap-4 row">
+        <article class="d-flex row">
+            <div class="form-group col-md-6 col-12">
+                <label for="email">Email</label>
+                <input type="email" id="email" formControlName="email" required>
+            </div>
                 
-                <div class="form-group">
-                    <label for="password">Password</label>
-                    <input type="password" id="password"  formControlName="password" required>
-                </div>
+            <div class="form-group col-md-6 col-12">
+                <label for="password">Password</label>
+                <input type="password" id="password"  formControlName="password" required>
             </div>
     
-            <div class="content">
-                <div class="form-group">
-                    <label for="firstName">First Name</label>
-                    <input type="text" id="firstName" formControlName="firstName" required>
-                </div>
+            <div class="form-group col-md-6 col-12">
+                <label for="firstName">First Name</label>
+                <input type="text" id="firstName" formControlName="firstName" required>
+            </div>
             
-                <div class="form-group">
-                    <label for="lastName">Last Name</label>
-                    <input type="text" id="lastName" formControlName="lastName" required>
-                </div>
-            </div>    
+            <div class="form-group col-md-6 col-12">
+                <label for="lastName">Last Name</label>
+                <input type="text" id="lastName" formControlName="lastName" required>
+            </div>
         </article>
         
-        <article class="disFlex flexColsNoWrap">
-            <a href="#" class="selfAlign"><p>Login</p></a>
-            <button type="submit">Register</button>
+        <article class="disFlex flexColsNoWrap row">
+            <a routerLink="../login" class="selfAlign col-12"><p>Login</p></a>
+            <button type="submit" class="col-12">Register</button>
         </article>
 
     </form>

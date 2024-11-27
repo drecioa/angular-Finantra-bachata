@@ -1,0 +1,69 @@
+@if(accounts.length!=0){
+    <section *ngFor="let account of accounts">
+        <article>Iban: {{account.iban}}</article>
+        <article>BankName: {{account.bankName}}</article>
+        <article>Notas: {{account.notes}}</article>
+        <article>Balance: {{account.balance}}</article>
+
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#edit" (click)="setTargetAccount(account)">Modificar</button>
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#delete" (click)="setTargetAccount(account)">Borrar</button>
+    </section>
+
+
+    <!--Editar account-->
+    <div class="modal fade" id="edit" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="Edit Account">Editar {{targetAccount.iban}}</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form #updateAccount="ngForm" (ngSubmit)="onUpdate(updateAccount)" class="needs-validation" novalidate>
+                        <article>
+                            <label for="bankName">Nombre del Banco</label>
+                            <input type="text" name="bankName" id="bankName" ngModel required class="form-control" [value]="targetAccount.bankName">
+                        </article>
+                        <article>
+                            <label for="notes">Notas</label>
+                            <input type="text" name="notes" id="notes" ngModel required class="form-control" [value]="targetAccount.notes">
+                        </article>
+  
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-primary" [disabled]="updateAccount.invalid">
+                                Guardar cambios
+                            </button>
+                            <button type="button" class="btn btn-secondary" id="miraCierrame" data-bs-dismiss="modal">Cerrar</button>
+                        </div>
+                    </form>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+
+
+    
+    <!--borrar account-->
+    <div class="modal fade" id="delete" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="Delete Account">Borrar {{targetAccount.iban}}</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    ¿Seguro que quieres borrar la cuenta con Iban [{{targetAccount.iban}}]?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" (click)="onDelete(targetAccount.accountId)">Aceptar</button>
+                    <button type="button" class="btn btn-secondary" id="miraCierrame2" data-bs-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+}@else {
+    <section>
+        Nada que mostrar!
+    </section>
+}

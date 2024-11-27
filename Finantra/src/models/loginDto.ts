@@ -1,8 +1,8 @@
 export class LoginDto{
-    email:String;
-    password:String;
+    email:string;
+    password:string;
     
-    constructor(email:String, password:String){
+    constructor(email:string, password:string){
         this.email=email;
         this.password=password;
     }

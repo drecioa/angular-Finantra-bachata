@@ -1,21 +1,22 @@
-<div class="disFlex centradoFlex flexColsNoWrap">
-    <form [formGroup]="form" (ngSubmit)="logIn()" method="post" class="disFlex flexColsNoWrap centradoFlex">
-        <h1 class="autoCenter">Login</h1>
-
-        <p class="error textAlign" id="error">
+<div class="d-flex centradoFlex flexColsNoWrap container">
+    <form [formGroup]="form" (ngSubmit)="logIn()" method="post" class="d-flex flexColsNoWrap centradoFlex row">
+        <h1 class="text-center col-12">Login</h1>
+        <p class="error text-center col-12" id="error">
             Correo o contraseña incorrecto
         </p>
-        <div class="flex1 disFlex flexColsNoWrap gap5">
+        <div class="d-flex flex-column gap-3 col-12">
             <label for="email">Email:</label>
             <input type="email" formControlName="email" placeholder="yourName@example.com">
         </div>
-        <div class="flex1 disFlex flexColsNoWrap gap5">
+        <div class="d-flex flex-column gap-3 col-12">
             <label for="password" >Password:</label>
             <input type="password" formControlName="password" >
         </div>
-        
         <hr>
-        <a href="#">Registrarme</a>
-        <button type="submit">Log in</button>
+        <a routerLink="../register" class="text-center">Registrarme</a>
+
+        <button type="submit" class="align-self-center">Log in</button>
+
     </form>
 </div>
+

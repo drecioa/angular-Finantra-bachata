@@ -1,0 +1,26 @@
+section {
+    width: 94%; 
+    padding: 2%;
+    border-radius: 15px;
+}
+
+.material-symbols-outlined {
+    border-radius: 5%;
+    user-select: none;
+    cursor: pointer;
+    font-size: 35px; 
+    line-height: 1; 
+    transition: transform 0.3s ease;
+}
+
+.material-symbols-outlined:hover {
+    transform: scale(1.2); 
+}
+
+.selected{
+    background-color: #0c2f46;
+}
+
+.home{
+    background-color: #09f;
+}

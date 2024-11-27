@@ -1,13 +1,14 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { RegisterService } from '@services/registerService/register.service';
 import { CommonModule } from '@angular/common';
-import { RegisterDTO } from '@models/register-dto.model';
+import { UtilsService } from '@services/utilsService/utils.service';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-register',
   standalone: true,
-  imports: [ReactiveFormsModule, CommonModule],
+  imports: [ReactiveFormsModule, CommonModule, RouterLink],
   templateUrl: './register.component.html',
   styleUrl: './register.component.css',
   providers: [RegisterService]
@@ -16,7 +17,7 @@ export class RegisterComponent {
   registerForm:FormGroup;
   registerStatus: string | null = null;
   
-  constructor(private formGroup: FormBuilder, private registerService:RegisterService) {
+  constructor(private formGroup: FormBuilder, private registerService:RegisterService, private util:UtilsService) {
     this.registerForm = this.formGroup.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required]],
@@ -30,6 +31,7 @@ export class RegisterComponent {
       this.registerService.register(this.registerForm.value).subscribe(
         (response) => {
           this.registerStatus = 'Registro exitoso!';
+          this.util.redirect.navigate(["/auth/login"])
           console.log(response);
         }, 
         (error) => {
