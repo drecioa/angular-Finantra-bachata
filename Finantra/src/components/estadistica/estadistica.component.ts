@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
 import { BankAccountDTO } from '@models/bank-account-dto';
 import { BankService } from '@services/bankService/bank.service';
+import { CryptoService } from '@services/cryptoService/crypto.service';
 import { Chart, ChartType } from 'chart.js';
+import { Crypto } from '@models/crypto';
 
 @Component({
   selector: 'app-estadistica',
@@ -13,16 +15,22 @@ import { Chart, ChartType } from 'chart.js';
 export class EstadisticaComponent {
   public chart: Chart | undefined;
   private accounts: BankAccountDTO[] = [];
+  private cryptos: Crypto[] = [];
 
-  constructor(private bankService: BankService) {}
+  constructor(private bankService: BankService, private cryptoService: CryptoService) {}
 
   ngAfterViewInit(): void {
     this.bankService.getAllAccounts().subscribe(
       (dataBank: BankAccountDTO[]) => {
         this.accounts = dataBank;
-        console.log('Cuentas bancarias:', this.accounts);
 
-        this.createChart();
+        this.cryptoService.getAllCryptos().subscribe(
+          (dataCrypto: Crypto[]) => {
+            this.cryptos = dataCrypto;
+
+            this.createChart();
+          }
+        );
       },
       (error) => {
         console.error('Error al obtener las cuentas bancarias:', error);
@@ -36,8 +44,8 @@ export class EstadisticaComponent {
       const ctx = canvas.getContext("2d");
       if (ctx) {
         const data = {
-          labels: ["Cuentas bancarias", "Criptomonedas"],
-          datasets: this.getDatasets(),  
+          labels: [""],
+          datasets: [...this.getDatasetsBank(),...this.getDatasetsCrypto()], 
         };
 
         if (this.chart) {
@@ -64,16 +72,12 @@ export class EstadisticaComponent {
     }
   }
 
-  getLabels(): string[] {
+  getLabelsBanks(): string[] {
     return this.accounts.map(account => account.bankName);
   }
 
-  getDatasets(): any[] {
-    return this.accounts.map((account) => ({
-      label: account.bankName,
-      data: [account.balance], 
-      backgroundColor: this.accounts.map(() => this.generateRandomColor())
-    }));
+  getLabelsCryptos(): string[] {
+    return this.cryptos.map(crypto => crypto.name);
   }
 
   generateRandomColor(): string {
@@ -82,4 +86,21 @@ export class EstadisticaComponent {
     const randomColorG = Math.floor(Math.random() * 255);
     return `rgb(${randomColorR}, ${randomColorG}, ${randomColorB})`;
   }
+  
+  getDatasetsBank(): any[] {
+    return this.accounts.map((account) => ({
+      label: account.bankName,
+      data: [account.balance], 
+      backgroundColor: this.accounts.map(() => this.generateRandomColor())
+    }));
+  }
+
+  getDatasetsCrypto(): any[] {
+    return this.cryptos.map((crypto) => ({
+      label: crypto.name,
+      data: [crypto.totalValue], 
+      backgroundColor: this.accounts.map(() => this.generateRandomColor())
+    }));
+  }
+
 }
