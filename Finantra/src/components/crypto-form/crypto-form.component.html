@@ -1,0 +1,26 @@
+<div style="position: relative;">
+    <label for="crypto-search">Buscar criptomoneda:</label>
+    <input 
+      id="crypto-search" 
+      type="text" 
+      [formControl]="searchControl" 
+      (focus)="showDropdown = true"
+      (blur)="hideDropdownWithDelay()"
+    />
+  
+    <ul *ngIf="searchResults.length > 0 && showDropdown" >
+      <li 
+        *ngFor="let crypto of searchResults" 
+        (click)="selectCrypto(crypto)" 
+        style="padding: 8px; cursor: pointer;">
+        {{ crypto.name }} ({{ crypto.symbol }})
+      </li>
+    </ul>
+  </div>
+  
+  <div *ngIf="selectedCrypto">
+    <p>Seleccionaste: {{ selectedCrypto.name }} ({{ selectedCrypto.symbol }})</p>
+    <input type="number" #amount />
+    <button (click)="addCrypto(amount.value)">Añadir</button>
+  </div>
+  
