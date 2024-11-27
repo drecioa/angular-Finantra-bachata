@@ -23,10 +23,32 @@
     
             <button [disabled]="updateUser.invalid" type="submit" class="btn btn-primary">Change</button>
         </form>
+        <article class="col-md-7 order-md-1 mt-md-0 mt-5 col-12 order-2 px-5">
+            <section class="d-flex px-0">
+                <input type="text" id="newTopic" #newTopicInput class="form-control flex1" placeholder="busca aqui temas..." list="temas">
+                <button class="btn btn-secondary" (click)="addTopicToList(newTopicInput.value)">+</button>
+            </section>
+            <hr>
+            <h2>Tus temas de interés</h2>
 
-        <article class="col-md-7 order-md-1 col-12 order-2 d-flex centradoFlex ">
-            ?
+            <article class="d-flex flexRowsWrap gap-2 topicContainer">
+                @if(listTopic.length!=0){
+                    <div class="bubble" *ngFor="let topico of listTopic" (click)="deleteTopicOfList(topico.name)">
+                        {{topico.name}}
+                    </div>
+                }@else {
+                    <div class="info">Aun no tienes ningun tema de interes >w&lt;</div>
+                }
+
+            </article>
+            <hr>
+            <button class="btn btn-primary mt-3" (click)="saveTopics()">Guardar Preferencias</button>
         </article>
     </div>
     
 </section>
+
+
+<datalist id="temas">
+    <option *ngFor="let topic of topics" [value]="topic.name"></option>
+</datalist>
