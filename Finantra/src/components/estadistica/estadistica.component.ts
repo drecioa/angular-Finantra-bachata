@@ -44,14 +44,8 @@ export class EstadisticaComponent {
       const ctx = canvas.getContext("2d");
       if (ctx) {
         const data = {
-          labels: [...this.getLabelsBanks(), ...this.getLabelsCryptos()],
-          datasets: [
-            {
-              label: '', 
-              data: [...this.getDatasBanks(),...this.getDatasCryptos()],
-              backgroundColor: this.generateRandomColor(),
-            },
-          ], 
+          labels: [""],
+          datasets: [...this.getDatasetsBank(),...this.getDatasetsCrypto()], 
         };
 
         if (this.chart) {
@@ -86,18 +80,27 @@ export class EstadisticaComponent {
     return this.cryptos.map(crypto => crypto.name);
   }
 
-  getDatasBanks(): number[] {
-    return this.accounts.map(account => account.balance);
-  }
-
-  getDatasCryptos(): number[] {
-    return this.cryptos.map(crypto => crypto.totalValue);
-  }
-
   generateRandomColor(): string {
     const randomColorR = Math.floor(Math.random() * 255);
     const randomColorB = Math.floor(Math.random() * 255);
     const randomColorG = Math.floor(Math.random() * 255);
     return `rgb(${randomColorR}, ${randomColorG}, ${randomColorB})`;
   }
+  
+  getDatasetsBank(): any[] {
+    return this.accounts.map((account) => ({
+      label: account.bankName,
+      data: [account.balance], 
+      backgroundColor: this.accounts.map(() => this.generateRandomColor())
+    }));
+  }
+
+  getDatasetsCrypto(): any[] {
+    return this.cryptos.map((crypto) => ({
+      label: crypto.name,
+      data: [crypto.totalValue], 
+      backgroundColor: this.accounts.map(() => this.generateRandomColor())
+    }));
+  }
+
 }
