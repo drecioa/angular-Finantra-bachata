@@ -86,6 +86,6 @@ export class EstadisticaGeneralComponent implements OnInit {
   startAutoUpdate(): void {
     this.updateInterval = setInterval(() => {
       this.updateChartData(); 
-    }, 10000); 
+    }, 60000); 
   }
 }
