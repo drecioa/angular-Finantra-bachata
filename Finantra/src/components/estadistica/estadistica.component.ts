@@ -16,10 +16,12 @@ import { EspecificStatisticsService } from '@services/statisticsService/especifi
 export class EstadisticaComponent {
   public chartCantidad: Chart | undefined;
   public chartCrypto: Chart | undefined;
+  public chartBank: Chart | undefined;
   private accounts: BankAccountDTO[] = [];
   private cryptos: Crypto[] = [];
   private lastDays: string[] = this.getLastDays();
-  private cryptoHistoricalData: { [key: string]: number[] } = {}; // Para almacenar datos históricos de las criptomonedas.
+  private cryptoHistoricalData: { [key: string]: number[] } = {}; 
+  private bankHistoricalData: { [key: string]: number[] } = {}; 
 
   constructor(private bankService: BankService, private cryptoService: CryptoService, private especificStattisticsService: EspecificStatisticsService) {}
 
@@ -32,10 +34,10 @@ export class EstadisticaComponent {
           (dataCrypto: Crypto[]) => {
             this.cryptos = dataCrypto;
 
-            // Cargar datos históricos de cada criptomoneda.
             this.cryptos.forEach(crypto => this.getHistoricalCrypto(crypto.id));
+            this.accounts.forEach(account => this.getHistoricalBank(account.accountId));
 
-            this.createChartCantidad(); // Crear la gráfica de cantidad.
+            this.createChartCantidad(); 
           }
         );
       },
@@ -88,7 +90,7 @@ export class EstadisticaComponent {
           labels: this.lastDays.map(date => date.slice(5)),
           datasets: this.cryptos.map((crypto) => ({
             label: crypto.name,
-            data: this.cryptoHistoricalData[crypto.id] || [], // Usa los datos históricos.
+            data: this.cryptoHistoricalData[crypto.id] || [], 
             fill: false,
             borderColor: this.generateRandomColor(),
             tension: 0.1
@@ -98,6 +100,39 @@ export class EstadisticaComponent {
         if (this.chartCrypto) {
           this.chartCrypto.data = data;
           this.chartCrypto.update();
+        } else {
+          this.chartCrypto = new Chart(ctx, {
+            type: 'line' as ChartType,
+            data: data,
+          });
+        }
+      } else {
+        console.error("No se pudo obtener el contexto 2D del canvas.");
+      }
+    } else {
+      console.error("No se encontró el canvas con el ID 'chart'.");
+    }
+  }
+
+  createChartBank(): void {
+    const canvas = document.getElementById("chart-banco") as HTMLCanvasElement;
+    if (canvas) {
+      const ctx = canvas.getContext("2d");
+      if (ctx) {
+        const data = {
+          labels: this.lastDays.map(date => date.slice(5)),
+          datasets: this.accounts.map((account) => ({
+            label: account.bankName,
+            data: this.bankHistoricalData[account.accountId] || [],
+            fill: false,
+            borderColor: this.generateRandomColor(),
+            tension: 0.1
+          })),
+        };
+
+        if (this.chartBank) {
+          this.chartBank.data = data;
+          this.chartBank.update();
         } else {
           this.chartCrypto = new Chart(ctx, {
             type: 'line' as ChartType,
@@ -162,17 +197,25 @@ export class EstadisticaComponent {
 
   getHistoricalCrypto(coinId: string): void {
     this.especificStattisticsService
-      .getHistorical(coinId, this.lastDays[0], this.lastDays[this.lastDays.length - 1])
+      .getHistoricalCrypto(coinId, this.lastDays[0], this.lastDays[this.lastDays.length - 1])
       .subscribe((data) => {
         this.cryptoHistoricalData[coinId] = data;
 
-        if (this.allCryptoDataLoaded()) {
-          this.createChartCrypto();
-        }
+        this.createChartCrypto();
+        
       });
   }
 
-  allCryptoDataLoaded(): boolean {
-    return this.cryptos.every(crypto => this.cryptoHistoricalData[crypto.id] !== undefined);
+  getHistoricalBank(accountId: string): void {
+    this.especificStattisticsService
+      .getHistoricalBank(accountId, this.lastDays[0], this.lastDays[this.lastDays.length - 1])
+      .subscribe((data) => {
+        this.bankHistoricalData[accountId] = data;
+
+        this.createChartBank();
+        
+      });
   }
+
+  
 }
