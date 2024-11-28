@@ -29,6 +29,7 @@ const routes: Routes = [
         children:[
             {path: "", component:HomeComponent,
                 children:[
+                    {path: "", component: SessionMainPageComponent, title:"Home"},
                     {path:"bankAccount", component:BankAccountComponent, title:"Cuentas Bancarias"},
                     {path:"cryptoWallet", component:CryptoWalletComponent, title: "Cryptomonedas"}
                 ],
@@ -36,6 +37,7 @@ const routes: Routes = [
             {path: "stats", component:EstadisticaComponent, title:"Estadistica"},
             {path: "create", component: AddNewComponent,
                 children:[
+                    {path: "", component: SessionMainPageComponent, title:"Añadir"},
                     {path: "crypto", component: CryptoFormComponent, title:"Crypto Search"}
                 ], 
                 title:"Añadir"},

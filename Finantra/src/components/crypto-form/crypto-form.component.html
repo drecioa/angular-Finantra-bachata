@@ -1,26 +1,53 @@
-<div style="position: relative;">
-    <label for="crypto-search">Buscar criptomoneda:</label>
-    <input 
-      id="crypto-search" 
-      type="text" 
-      [formControl]="searchControl" 
-      (focus)="showDropdown = true"
-      (blur)="hideDropdownWithDelay()"
-    />
+<section class="mt-2 aniadir d-flex flexColsNoWrap justify-content-center">
+  <label for="crypto-search">Buscar criptomoneda:</label>
+  <input 
+    id="crypto-search" 
+    type="text" 
+    [formControl]="searchControl" 
+    (focus)="showDropdown = true"
+    (blur)="hideDropdownWithDelay()"
+  />
   
+  <article class="listado mt-2">
     <ul *ngIf="searchResults.length > 0 && showDropdown" >
       <li 
         *ngFor="let crypto of searchResults" 
         (click)="selectCrypto(crypto)" 
-        style="padding: 8px; cursor: pointer;">
+        style="padding: 8px; cursor: pointer;"
+        data-bs-toggle="modal" data-bs-target="#addModal">
         {{ crypto.name }} ({{ crypto.symbol }})
       </li>
     </ul>
-  </div>
+  </article>
+
+</section>
   
-  <div *ngIf="selectedCrypto">
-    <p>Seleccionaste: {{ selectedCrypto.name }} ({{ selectedCrypto.symbol }})</p>
-    <input type="number" #amount />
-    <button (click)="addCrypto(amount.value)">Añadir</button>
+
+<div class="modal fade" id="addModal" tabindex="-1">
+  <div class="modal-dialog">
+      <div class="modal-content">
+          <div class="modal-header">
+              <h5 class="modal-title" id="Delete Account"></h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <div *ngIf="selectedCrypto" class="container d-flex flexColsNoWrap centradoFlex gap-5">
+              <h4>{{ selectedCrypto.name }} ({{ selectedCrypto.symbol }})</h4>
+              <article class="row d-flex gap-5 flexRowsNoWrap centradoFlex">
+                <button class="btn btn-secondary flex1 btn-special" (click)="subtractAmount()">-</button>
+                <input type="number"class="flex1" [value]="this.cantidad" #amount disabled/> 
+                <button class="btn btn-secondary flex1 btn-special" (click)="addAmount()">+</button>
+              </article>
+
+              <div class="modal-footer d-flex justify-content-center">
+                <button class="btn btn-primary" (click)="addCrypto(amount.value)" data-bs-dismiss="modal">Añadir</button>
+                <button type="button" class="btn btn-secondary" id="miraCierrame2" data-bs-dismiss="modal">Cerrar</button>
+            </div>
+            </div>
+          </div>
+
+      </div>
   </div>
+</div>
+
   

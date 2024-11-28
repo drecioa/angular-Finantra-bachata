@@ -1,9 +1,8 @@
-<div class="disFlex flexColsNoWrap centradoFlex">
+<div class="d-flex flexColsNoWrap centradoFlex">
     <div class="selection">
-        <div class="tipos_registros disFlex">
-            <a (click)="redirectToBank()">Cuentas bancarias</a>
-            <a routerLink="crypto">Criptomonedas</a>
-            <a>Acciones</a>
+        <div class="tipos_registros d-flex justify-content-around">
+            <a style="color: #09f;" (click)="redirectToBank()" routerLinkActive="active">Cuentas bancarias</a>
+            <a style="color: #09f;" routerLink="crypto" routerLinkActive="active">Criptomonedas</a>
         </div>
     </div>
     <router-outlet></router-outlet>
