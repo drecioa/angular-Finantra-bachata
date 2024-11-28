@@ -1,0 +1,9 @@
+section{
+    width: 50%;
+    align-self: center;
+    justify-self: center;
+}
+
+p{
+    text-align: justify;
+}
