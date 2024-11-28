@@ -56,18 +56,3 @@ a{
     padding: 5px;
 }
 
-.active{
-    /*border-bottom: .2em solid #09f;*/
-    animation: activado .5s linear forwards;
-}
-
-
-@keyframes activado {
-    0%{
-        border-bottom: 0em solid #09f;
-    }
-
-    100%{
-        border-bottom: .2em solid #09f;
-    }
-}
