@@ -38,6 +38,7 @@ export class UserUpdateComponent implements OnInit{
       (response)=>{
         console.log(response);
         this.util.auth.login(userAux);
+        window.location.reload();
       },
       (error)=>{
         console.log(error);

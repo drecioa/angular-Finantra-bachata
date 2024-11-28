@@ -17,7 +17,7 @@ export class CryptoService {
   private apiDeleteUrl = 'http://localhost:8080/api/v1/crypto/delete/';
 
   protected user: User | null = null; 
-
+  
   constructor(private http: HttpClient) {
     const userFromStorage = sessionStorage.getItem('user');
     
@@ -70,7 +70,7 @@ export class CryptoService {
     };
 
     return this.http.post<{ data: Crypto[] }>(this.apiGetAllUrl, body, { headers }).pipe(
-      map((response) => response.data || []), 
+      map((response) => response.data as Crypto[]), 
       catchError((error) => {
         console.error('Error al obtener todas las criptomonedas:', error);
         return of([]);
