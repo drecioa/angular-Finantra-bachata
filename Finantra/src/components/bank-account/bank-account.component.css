@@ -1,5 +1,5 @@
 section{
-    margin-top: 1em;
+    margin-bottom: 1em;
 }
 
 label{
@@ -14,4 +14,12 @@ label{
 
     transition: opacity .15s ease-in-out;
     z-index: 9999;
+}
+
+button{
+    height: max-content;
+}
+
+.terciario{
+    color: white;
 }
