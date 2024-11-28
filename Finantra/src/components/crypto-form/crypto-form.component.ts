@@ -15,7 +15,7 @@ import { of } from 'rxjs';
   styleUrl: './crypto-form.component.css'
 })
 export class CryptoFormComponent implements OnInit {
-
+  protected cantidad:number=0;
   public searchControl = new FormControl('');
   public searchResults: CryptoDto[] = [];
   public selectedCrypto: CryptoDto | null = null;
@@ -62,6 +62,14 @@ export class CryptoFormComponent implements OnInit {
         console.error('Error al procesar la crypto:', error);
       }
     );
+  }
+
+  subtractAmount(): void {
+    if(this.cantidad>0)
+    this.cantidad--;
+  }
+  addAmount(): void {
+    this.cantidad++;
   }
 
 }
