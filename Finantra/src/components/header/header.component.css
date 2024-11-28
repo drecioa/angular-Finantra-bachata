@@ -5,6 +5,7 @@ section {
 }
 
 .material-symbols-outlined {
+    height: max-content;
     border-radius: 5%;
     user-select: none;
     cursor: pointer;
@@ -23,4 +24,9 @@ section {
 
 .home{
     background-color: #09f;
+}
+
+.ancho{
+    width: 90vw;
+    justify-self: center;
 }

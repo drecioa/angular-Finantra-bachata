@@ -1,4 +1,6 @@
 section {
+  border-top: .25em solid #09f;
+  box-shadow: 1em 1em 2px rgba(0, 0, 0, 0.372);
   margin: 2% 5%;
   max-width: 900px;
   width: 75%; 

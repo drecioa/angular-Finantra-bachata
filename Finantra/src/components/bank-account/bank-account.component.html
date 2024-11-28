@@ -1,12 +1,17 @@
 @if(accounts.length!=0){
-    <section *ngFor="let account of accounts">
-        <article>Iban: {{account.iban}}</article>
-        <article>BankName: {{account.bankName}}</article>
-        <article>Notas: {{account.notes}}</article>
-        <article>Balance: {{account.balance}}</article>
-
-        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#edit" (click)="setTargetAccount(account)">Modificar</button>
-        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#delete" (click)="setTargetAccount(account)">Borrar</button>
+    <section *ngFor="let account of accounts" class="row d-flex gap-5">
+        <div class="row col-lg-9 col-12">
+            <h3><b>IBAN</b> {{account.iban}}</h3>
+            <hr>
+            <h5><b>Nombre del banco</b> {{account.bankName}}</h5>
+            <p>{{account.notes}}</p>
+            <h4>Balance: {{account.balance}}€</h4>
+        </div>
+        
+        <div class="row col-lg-3 col-12 d-flex align-items-center">
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#edit" (click)="setTargetAccount(account)">Modificar</button>
+            <button type="button" class="btn terciario" data-bs-toggle="modal" data-bs-target="#delete" (click)="setTargetAccount(account)">Borrar</button>
+        </div>
     </section>
 
 
