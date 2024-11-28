@@ -134,7 +134,7 @@ export class EstadisticaComponent {
           this.chartBank.data = data;
           this.chartBank.update();
         } else {
-          this.chartCrypto = new Chart(ctx, {
+          this.chartBank = new Chart(ctx, {
             type: 'line' as ChartType,
             data: data,
           });

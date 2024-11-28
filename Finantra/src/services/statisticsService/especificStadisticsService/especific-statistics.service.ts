@@ -44,15 +44,15 @@ export class EspecificStatisticsService {
         password: this.user.password 
     };
 
-    return this.http.post<{ data: { dateTime: string; price: number }[] }>(
+    return this.http.post<{ data: { bankAccountId: string; bankName: string; balance: number; date: string }[] }>(
       `${this.apiHistoricalBankUrl}${accountId}?fromDate=${fromDate}&toDate=${toDate}`, body, {headers}
     ).pipe(
       map((response) => {
         console.log(response);
-        return response.data.map(item => item.price);
+        return response.data.map(item => item.balance);
       }),
       catchError((error) => {
-        console.error('Error al obtener los datos históricos:', error);
+        console.error('Error al obtener los datos históricos de bancos:', error);
         return of([]); 
       })
     );
