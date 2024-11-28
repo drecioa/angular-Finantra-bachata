@@ -1,10 +1,9 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap">
-<article class="container">
+<article class="container mb-3">
     <nav class="row">
-        <div class="tipos_registros d-flex col-md-8 col-12">
+        <div class="tipos_registros d-flex justify-content-around col-md-8 col-12">
             <a routerLink="bankAccount" routerLinkActive="active">Cuentas bancarias</a>
             <a routerLink="cryptoWallet" routerLinkActive="active">Criptomonedas</a>
-            <a href="#">Acciones</a>
         </div>
         <div class="search_bar col-md-4 col-12">
             <input type="text" [(ngModel)]="infoName" placeholder="Nombre">
