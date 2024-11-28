@@ -139,11 +139,11 @@ input::placeholder{
 
 /***************************Otros*********************************/
 
-.show{
+/*.show{
     background-color: red;
     border: 1px solid white;
 }
-
+*/
 .error {
     color: red; 
     font-size: 18px; 
