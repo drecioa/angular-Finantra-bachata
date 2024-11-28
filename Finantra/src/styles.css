@@ -57,7 +57,7 @@ a{
 
     transition: 1s color;
     &:hover{
-        color: white;
+        color: #09f;
     }
 }
 
