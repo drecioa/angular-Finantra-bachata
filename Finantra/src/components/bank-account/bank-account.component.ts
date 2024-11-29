@@ -17,6 +17,7 @@ import { UtilsService } from '@services/utilsService/utils.service';
   styleUrl: './bank-account.component.css'
 })
 export class BankAccountComponent implements OnInit{
+  protected loading:boolean=true;
   protected fromDat:string;
   protected toDat:string;
 
@@ -42,7 +43,7 @@ export class BankAccountComponent implements OnInit{
     this.utils.auth.data.subscribe(
       (data)=>{
           this.user= JSON.parse(data);
-        }
+      }
     );
     this.getCuentas(new LoginDto(this.user.email, this.user.password));
   }
@@ -55,6 +56,8 @@ export class BankAccountComponent implements OnInit{
         } else {
           this.accounts = response.data;
         }
+
+        this.loading=false;
       },(error)=>{
         console.error(error);
       }
