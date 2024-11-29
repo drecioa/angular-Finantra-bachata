@@ -12,7 +12,9 @@
   </div>
   
   <div *ngIf="bankAccounts.length === 0">
-    <p>No se encontraron cuentas de banco.</p>
+    <div class="progress-bar">
+      <div class="progress"></div>
+    </div>
     <a href="./home"><button>Volver</button></a>
   </div>
   

@@ -170,10 +170,11 @@ export class EstadisticaComponent {
   }
 
   getDatasetsBank(): any[] {
+    let contador = 0; 
     return this.accounts.map((account) => ({
-      label: account.bankName,
-      data: [account.balance],
-      backgroundColor: this.accounts.map(() => this.generateRandomColor())
+        label: account.bankName ?? `Cuenta de banco ${++contador}`, 
+        data: [account.balance],
+        backgroundColor: this.generateRandomColor(), 
     }));
   }
 
