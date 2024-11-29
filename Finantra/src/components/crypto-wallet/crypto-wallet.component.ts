@@ -12,6 +12,7 @@ import { UtilsService } from '@services/utilsService/utils.service';
   styleUrl: './crypto-wallet.component.css'
 })
 export class CryptoWalletComponent implements OnInit {
+  protected loading:boolean=true;
   public cryptos: Crypto[] = [];
   public selectedCrypto: Crypto | null = null;  
   public showAmountInput: boolean = false;
@@ -31,6 +32,7 @@ export class CryptoWalletComponent implements OnInit {
         } else {
           console.log("No hay cryptos asociadas a esta cuenta");
         }
+        this.loading=false;
       }, (error) => {
         console.error("No se pudo conectar con las cryptos del usuario: ", error);
       }

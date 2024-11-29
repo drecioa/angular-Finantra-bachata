@@ -1,4 +1,5 @@
-@if (this.cryptos.length != 0) {
+@if (!loading) {
+  @if (this.cryptos.length != 0) {
     <section *ngFor="let crypto of cryptos" class="d-flex flex-row align-items-center border rounded p-3 mb-3">
         <div class="flex-grow-1">
           <article><strong>Name:</strong> {{ crypto.name }}</article>
@@ -36,8 +37,13 @@
           </div>
         </div>
     </div>  
-} @else {
-    <div class="progress-bar">
-      <div class="progress"></div>
-    </div>
+  } @else {
+      <section>
+        nada que mostrar
+      </section>
+  }
+}@else {
+  <div class="progress-bar">
+    <div class="progress"></div>
+  </div>
 }
