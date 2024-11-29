@@ -16,7 +16,7 @@ export class BankService {
   private apiGetUrl = 'http://localhost:8080/api/v1/bank/accounts';  
   private apiUpdateUrl= 'http://localhost:8080/api/v1/bank/accounts/'
   private apiDeleteUrl= 'http://localhost:8080/api/v1/bank/accounts/delete/'
-
+  private apiTransacctionUrl= 'http://localhost:8080/api/v1/bank/accounts/transactions/'
   private apis="http://localhost:8080/api/v1/bank/accounts/"
   protected user: User | null = null; 
   
@@ -103,29 +103,37 @@ export class BankService {
     return this.http.post(this.apiDeleteUrl+accountId, loginDto);
   }
 
-updateAccount(bankAccountDTO: BankAccountDTO, loginDTO: LoginDto): Observable<any> {
-  const body = {
-    bankAccountDTO: {
-      accountId: bankAccountDTO.accountId,
-      bankName: bankAccountDTO.bankName,
-      iban: bankAccountDTO.iban,
-      currency: bankAccountDTO.currency,
-      balance: bankAccountDTO.balance,
-      notes: bankAccountDTO.notes
-    },
-    loginDTO: {
-      email: loginDTO.email,
-      password: loginDTO.password
-    }
-  };
+  updateAccount(bankAccountDTO: BankAccountDTO, loginDTO: LoginDto): Observable<any> {
+    const body = {
+      bankAccountDTO: {
+        accountId: bankAccountDTO.accountId,
+        bankName: bankAccountDTO.bankName,
+        iban: bankAccountDTO.iban,
+        currency: bankAccountDTO.currency,
+        balance: bankAccountDTO.balance,
+        notes: bankAccountDTO.notes
+      },
+      loginDTO: {
+        email: loginDTO.email,
+        password: loginDTO.password
+      }
+    };
 
-  console.log("Body enviado al API:\n", JSON.stringify(body, null, 2));
-  console.log("--->"+this.apiUpdateUrl + bankAccountDTO.accountId);
-  return this.http.put(this.apiUpdateUrl + bankAccountDTO.accountId, JSON.stringify(body),  { headers: { 'Content-Type': 'application/json' }});
-}
+    console.log("Body enviado al API:\n", JSON.stringify(body, null, 2));
+    console.log("--->"+this.apiUpdateUrl + bankAccountDTO.accountId);
+    return this.http.put(this.apiUpdateUrl + bankAccountDTO.accountId, JSON.stringify(body),  { headers: { 'Content-Type': 'application/json' }});
+  }
 
-temp(id:String, login: LoginDto):Observable<any>{
-  return this.http.post(this.apis+id, login);
-}
+  temp(id:String, login: LoginDto):Observable<any>{
+    return this.http.post(this.apis+id, login);
+  }
+
+  getAllTransactions(accountId:string, login:LoginDto, from:string, to:string):Observable<any>{
+    const params = new HttpParams()
+    .set('from', from)
+    .set('to', to);
+
+    return this.http.post(this.apiTransacctionUrl+accountId, login,  { params });
+  }
 
 }

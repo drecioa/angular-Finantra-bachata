@@ -4,6 +4,7 @@ import { FormsModule, NgForm } from '@angular/forms';
 import { Bank } from '@models/Bank';
 import { BankAccountDTO } from '@models/bank-account-dto';
 import { LoginDto } from '@models/loginDto';
+import { Transaction } from '@models/Transaction';
 import { User } from '@models/User';
 import { BankService } from '@services/bankService/bank.service';
 import { UtilsService } from '@services/utilsService/utils.service';
@@ -16,7 +17,9 @@ import { UtilsService } from '@services/utilsService/utils.service';
   styleUrl: './bank-account.component.css'
 })
 export class BankAccountComponent implements OnInit{
-  //No funciona por ahora*******************************************************
+  protected fromDat:string;
+  protected toDat:string;
+
   protected user: User={
     lastName: "Doe",
     firstName:"Jonh",
@@ -32,7 +35,7 @@ export class BankAccountComponent implements OnInit{
     balance: 0,
     notes: ""};
   protected accounts:Bank[]=[];
-
+  protected accountTrasactions:Transaction[]=[];
   constructor (private utils:UtilsService, private bankService:BankService){}
 
   ngOnInit(): void {
@@ -78,7 +81,33 @@ export class BankAccountComponent implements OnInit{
     }, 1000)
     ;
   }
+  
+  openTrasactions(from:string, to:string){
+    if(from&&to&&this.validateDates(from, to)){
 
+      const containerMain=document.getElementById("bankAccountMainSection");
+
+      this.setFromDate(from);
+      this.setToDate(to);
+
+      let botonCerrar=document.getElementById("miraCierrame3");
+      botonCerrar.click();
+
+      let boton=document.createElement("button");
+      boton.style.display="none";
+      boton.type="button";
+      boton.setAttribute("data-bs-toggle", "modal");
+      boton.setAttribute("data-bs-target", "#trasaction");
+      
+
+      containerMain.appendChild(boton);
+      boton.click();
+
+      this.setTransactions();
+    }else{
+      alert("completa todos los campos de \"fechas\"\ny en el orden correcto")
+    }
+  }
   //No funciona por ahora*******************************************************
   onUpdate(form: NgForm):void{
     console.log(form.value);
@@ -123,5 +152,32 @@ export class BankAccountComponent implements OnInit{
       currency: "",
       balance: 0,
       notes: ""};
+  }
+
+  setTransactions():void{
+    this.bankService.getAllTransactions(this.targetAccount.accountId, 
+                                        new LoginDto(this.user.email, this.user.password), 
+                                        this.fromDat, 
+                                        this.toDat).subscribe(
+                                          (data)=>{
+                                            this.accountTrasactions=data.data;
+                                          }, (error)=>{console.error(error);
+                                          }
+                                        )
+  }
+  setToDate(newValue:string):void{
+    this.toDat=newValue;
+  }
+  setFromDate(newValue:string):void{
+    this.fromDat=newValue;
+  }
+
+  validateDates(fromDate:string, toDate:string):boolean {
+    const from = new Date(fromDate);
+    const to = new Date(toDate);
+    if (from > to) {
+      return false
+    }
+    return true
   }
 }

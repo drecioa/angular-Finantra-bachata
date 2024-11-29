@@ -1,7 +1,7 @@
 @if(accounts.length!=0){
-    <section *ngFor="let account of accounts" class="row d-flex gap-5">
+    <section *ngFor="let account of accounts" id="bankAccountMainSection" class="row d-flex gap-5">
         <div class="row col-lg-9 col-12">
-            <h3><b>IBAN</b> {{account.iban}}</h3>
+            <h3 data-bs-toggle="modal" data-bs-target="#trasactionModel" (click)="setTargetAccount(account)"><b>IBAN</b> {{account.iban}}</h3>
             <hr>
             <h5><b>Nombre del banco</b> {{account.bankName}}</h5>
             <p>{{account.notes}}</p>
@@ -63,6 +63,78 @@
                 <div class="modal-footer">
                     <button type="button" (click)="onDelete(targetAccount.accountId)">Aceptar</button>
                     <button type="button" class="btn btn-secondary" id="miraCierrame2" data-bs-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--selectTrasaction-->
+    <div class="modal fade" id="trasactionModel" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="Trasaction Account">{{targetAccount.iban}} - TRASACTIONS</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body container">
+                    <article class="row">
+                        <label for="fromDate" class="col-lg-3 col-12">Del:</label>
+                        <input type="date" #fromDate name="fromDate" id="fromDate" class="form-control col-lg-9 col-12" required>
+                    </article>
+                    <article class="row">
+                        <label for="toDate" class="col-lg-3 col-12">Hasta</label>
+                        <input type="date" #toDate name="toDate" id="toDate" class="form-control col-lg-9 col-12" required>
+                    </article>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" (click)="openTrasactions(fromDate.value, toDate.value)">Aceptar</button>
+                    <button type="button" class="btn btn-secondary" id="miraCierrame3" data-bs-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--Trasaction-->
+    <div class="modal fade" id="trasaction" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="Trasaction Account">{{this.fromDat}} - {{this.toDat}}</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body container modalBodyMine">
+                    @if (accountTrasactions.length!=0) {
+                        <article *ngFor="let transaction of accountTrasactions" class="transaction-card">
+                            <header class="transaction-header">
+                              <h3 class="transaction-merchant">{{ transaction.merchantName || 'Desconocido' }}</h3>
+                              <span class="transaction-date">{{ transaction.timestamp | date: 'short' }}</span>
+                            </header>
+                          
+                            <div class="transaction-body">
+                              <p class="transaction-description">{{ transaction.description || 'Sin descripción disponible' }}</p>
+                              <div class="transaction-details">
+                                <p><strong>Categoría:</strong> {{ transaction.transactionCategory }}</p>
+                                <p><strong>Tipo:</strong> {{ transaction.transactionType }}</p>
+                                <p><strong>Clasificación:</strong> {{ transaction.transactionClassification.join(', ') }}</p>
+                              </div>
+                            </div>
+                          
+                            <footer class="transaction-footer">
+                              <span class="transaction-amount" [ngClass]="transaction.amount >= 0 ? 'positive' : 'negative'">
+                                {{ transaction.amount | currency: transaction.currency }}
+                              </span>
+                              <span class="transaction-balance">
+                                Saldo: {{ transaction.runningBalance.amount | currency: transaction.runningBalance.currency }}
+                              </span>
+                            </footer>
+                          </article>
+                          
+                    }@else {
+                        <p>No tienes aun transacciones</p>
+                    }
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" id="miraCierrame4" data-bs-dismiss="modal">Aceptar</button>
                 </div>
             </div>
         </div>
