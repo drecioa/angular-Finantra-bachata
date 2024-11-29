@@ -15,6 +15,7 @@ import { NgOptimizedImage } from '@angular/common';
   styleUrl: './news.component.css'
 })
 export class NewsComponent implements OnInit{
+  protected loading:boolean=true;
   protected news:News[]=[];
   private user:User;
   constructor(private newsService:NewsService, private util:UtilsService){}
@@ -29,6 +30,8 @@ export class NewsComponent implements OnInit{
       (data)=>{
         console.log(data+"Y la respuesta?")
         this.news=data.data;
+
+        this.loading=false;
       }, (error)=>{console.error(error);
       }
     )
