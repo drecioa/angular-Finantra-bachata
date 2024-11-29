@@ -4,6 +4,7 @@ import { FormsModule, NgForm } from '@angular/forms';
 import { LoginDto } from '@models/loginDto';
 import { Topic } from '@models/Topic';
 import { User } from '@models/User';
+import { DeleteUserService } from '@services/deleteService/delete-user.service';
 import { NewsService } from '@services/newsService/news-service.service';
 import { UpdateService } from '@services/updateService/update-service.service';
 import { UtilsService } from '@services/utilsService/utils.service';
@@ -29,7 +30,7 @@ export class UserUpdateComponent implements OnInit{
 
   protected topics:Topic[]=[];
 
-  constructor(private update:UpdateService, private util:UtilsService, private newsService:NewsService){}
+  constructor(private update:UpdateService, private util:UtilsService, private newsService:NewsService, private deleteUserService:DeleteUserService){}
 
   updateUserMethod(form:NgForm):void{
     const userAux:User=form.value;
@@ -70,6 +71,16 @@ export class UserUpdateComponent implements OnInit{
     )
   }
 
+  borrarCuenta(){
+    this.deleteUserService.deleteUser(new LoginDto(this.user.email, this.user.password)).subscribe(
+      (data)=>{
+        console.log(data);
+        this.util.auth.logout();
+        this.util.redirect.navigate(["/auth"])
+      }, (error)=>{console.error(error);
+      }
+    );
+  }
   ngOnInit(): void {
       this.util.auth.data.subscribe(
         (data)=>{
