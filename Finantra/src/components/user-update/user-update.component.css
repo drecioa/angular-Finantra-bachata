@@ -1,0 +1,39 @@
+section{
+    padding: 5% 10%;
+
+}
+
+form article{
+    margin-bottom: 2em;
+}
+
+#newTopic:focus{
+    border: none;
+    outline: 2px solid rgb(49, 173, 255);
+}
+.bubble{
+    padding: 1% 5%;
+    height: max-content;
+    border-radius: 2em;
+    background-color: rgb(75, 126, 160);
+    box-shadow: .25em .25em 0px rgba(0, 0, 0, 0.553) ;
+    transition: .5s transform ease;
+    &:hover{
+        transform: scale(105%);
+        cursor: pointer;
+    }
+}
+
+.info{
+    height: max-content;
+    margin: 1em 0em;
+    border-left: .25em solid #09f;
+    padding-left: 1em;
+    color: #64859c;
+}
+
+.topicContainer{
+    padding: .5em;
+    height: 16em;
+    overflow: auto;
+}

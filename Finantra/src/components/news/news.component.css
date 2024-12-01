@@ -1,0 +1,19 @@
+section{
+    padding: 5% 10%;
+}
+article{
+    background-color: #1b74ae;
+}
+
+.container{
+    padding: 5% 10%;
+    border-radius: 1em;
+}
+
+a{
+    color: white;
+}
+
+p{
+    color: #8aaac0;
+}

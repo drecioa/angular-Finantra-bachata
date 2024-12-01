@@ -1,0 +1,56 @@
+.modal-content {
+    color: black;
+}
+
+.aniadir{
+  margin-top: 3em;
+  width: 40vw;
+  
+}
+
+.listado{
+  max-height: 15em;
+  overflow: auto;
+
+  --sb-track-color: #4a66737e;
+  --sb-thumb-color: rgb(55, 124, 171);
+  --sb-size: 15px;
+}
+
+li{
+  text-align: center;
+  margin-top: 1em;
+
+  &:hover{
+    background-color: #0c2f46;
+  }
+}
+
+
+.btn-special{
+  border-radius: 100em;
+  height: max-content;
+  width: max-content;
+}
+.listado::-webkit-scrollbar {
+  width: var(--sb-size)
+}
+
+.listado::-webkit-scrollbar-track {
+  background: var(--sb-track-color);
+  border-radius: 14px;
+}
+
+.listado::-webkit-scrollbar-thumb {
+  background: var(--sb-thumb-color);
+  border-radius: 14px;
+  
+}
+
+@supports not selector(::-webkit-scrollbar) {
+  .listado {
+  scrollbar-color: var(--sb-thumb-color)
+                  var(--sb-track-color);
+  }
+}
+  

@@ -1,0 +1,16 @@
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap">
+<article class="container">
+    <nav class="row">
+        <div class="tipos_registros d-flex justify-content-around col-md-8 col-12">
+            <a routerLink="bankAccount" routerLinkActive="active">Cuentas bancarias</a>
+            <a routerLink="cryptoWallet" routerLinkActive="active">Criptomonedas</a>
+        </div>
+        <div class="search_bar col-md-4 col-12">
+            <input type="text" [(ngModel)]="infoName" placeholder="Nombre">
+            <button class="search_button">
+                <span class="material-symbols-outlined" (click)="search(infoName)">search</span>
+            </button>
+        </div>
+    </nav>
+</article>
+<router-outlet class="container"></router-outlet>

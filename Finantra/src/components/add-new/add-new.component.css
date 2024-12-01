@@ -1,0 +1,13 @@
+.tipos_registros {
+    flex: 2; 
+    justify-content: space-between; 
+    align-items: center; 
+    gap: 12px; 
+    padding-left: 2%;
+    padding-right: 2%;
+    padding-top: 1%;
+    padding-bottom: 1%;
+    background-color: aliceblue;
+    border-radius: 5px;
+    width: 500px;
+}

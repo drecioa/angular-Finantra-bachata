@@ -1,1 +1,218 @@
-/* You can add global styles to this file, and also import other style files */
+*{
+    box-sizing: border-box;
+    margin: 0;
+}
+nav{
+    width: 100%;
+}
+
+ul{
+    list-style: none;
+}
+body {
+    box-sizing: border-box;
+    background-color: #092E46;
+    overflow: auto;
+    margin: 0;
+    color: white;
+    --sb-track-color: #4a66737e;
+    --sb-thumb-color: rgb(55, 124, 171);
+    --sb-size: 15px;
+}
+
+    body::-webkit-scrollbar {
+        width: var(--sb-size)
+    }
+    
+    body::-webkit-scrollbar-track {
+        background: var(--sb-track-color);
+        border-radius: 14px;
+    }
+    
+    body::-webkit-scrollbar-thumb {
+        background: var(--sb-thumb-color);
+        border-radius: 14px;
+        
+    }
+    
+    @supports not selector(::-webkit-scrollbar) {
+        body {
+        scrollbar-color: var(--sb-thumb-color)
+                        var(--sb-track-color);
+        }
+    }
+hr{
+    width: 100%;
+}
+
+h1{
+    color: #09f;
+}
+
+h1, h2, h3{
+    cursor: default;
+}
+
+a{
+    width: max-content;
+    color: #09f;
+    font-size: larger;
+    text-decoration: none;
+
+    transition: 1s color;
+    &:hover{
+        color: #09f;
+    }
+}
+
+section{
+    background-color: #114669;
+    padding: 5% 10%;
+    border-radius: 8px;
+    height: max-content;
+}
+
+label {
+    color:#FFFFFF;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+input{
+    width: 100%;
+    min-width: 2em;
+    border-radius: 10px;
+    text-align: center;
+    color: rgb(209, 209, 209);
+    padding: 3%;
+    background-color: #578DB0;
+    transition: 1s border;
+    &:focus{
+        color: white;
+        background-color: #64a4ce;
+        border: 2px #19a7ff solid;
+        outline: none;
+    }
+}
+
+input::placeholder{
+    color: #114669;
+}
+
+/*++++++++++++++++++FLEX+++++++++++++++++++*/
+.disFlex{
+    display: flex;
+    gap: 5%;
+}
+
+.flexColsNoWrap{
+    flex-flow: column nowrap;
+}
+.flexColsWrap{
+    flex-flow: column wrap;
+}
+
+.flexRowsNoWrap{
+    flex-flow: row nowrap;
+}
+
+.flexRowsWrap{
+    flex-flow: row wrap;
+}
+
+.flex1{
+    flex: 1;
+}
+
+.centradoFlex{
+    justify-content: center;
+    align-items: center;
+}
+
+.selfAlign{
+    justify-self: center;
+    align-self: center;
+}
+
+
+
+
+/***************************Otros*********************************/
+
+/*.show{
+    background-color: red;
+    border: 1px solid white;
+}
+*/
+.error {
+    color: red; 
+    font-size: 18px; 
+    text-align: center; 
+    margin-bottom: 20px; 
+}
+
+.textAlign{
+    text-align: center;
+}
+
+
+.active{
+    /*border-bottom: .2em solid #09f;*/
+    animation: activado .5s linear forwards;
+}
+
+
+@keyframes activado {
+    0%{
+        border-bottom: 0em solid #09f;
+    }
+
+    100%{
+        border-bottom: .2em solid #09f;
+    }
+}
+
+
+
+ 
+.progress-bar {
+    width: 80%;
+    height: 10px;
+    background-color: #ccc;
+    border-radius: 5px;
+    overflow: hidden;
+    margin: auto;
+  }
+  
+  .progress {
+    width: 0;
+    height: 100%;
+    background-color: #3498db;
+    animation: load 2s infinite;
+  }
+  
+  @keyframes load {
+    0% {
+      width: 0;
+    }
+    100% {
+      width: 100%;
+    }
+  }
+
+
+
+
+
+/************Gap*************/
+.gap5{
+    gap: 5px;
+}
+
+.gap15{
+    gap: 15px;
+}
+
+.gap20{
+    gap: 20px;
+}
