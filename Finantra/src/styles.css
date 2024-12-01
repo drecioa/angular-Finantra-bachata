@@ -195,11 +195,8 @@ input::placeholder{
     0% {
       width: 0;
     }
-    50% {
-      width: 100%;
-    }
     100% {
-      width: 0;
+      width: 100%;
     }
   }
 
