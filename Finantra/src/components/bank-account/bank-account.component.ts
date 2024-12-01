@@ -49,6 +49,7 @@ export class BankAccountComponent implements OnInit{
   }
 
   getCuentas(login: LoginDto):void{
+    this.loading=true;
     this.bankService.getAccounts(login).subscribe(
       (response)=>{
         if (typeof response.data === 'string') {
@@ -60,6 +61,7 @@ export class BankAccountComponent implements OnInit{
         this.loading=false;
       },(error)=>{
         console.error(error);
+        this.loading=false;
       }
     )
   }

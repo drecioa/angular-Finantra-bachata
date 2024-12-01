@@ -32,7 +32,9 @@ export class NewsComponent implements OnInit{
         this.news=data.data;
 
         this.loading=false;
-      }, (error)=>{console.error(error);
+      }, (error)=>{
+        console.error(error);
+        this.loading=false;
       }
     )
   }
