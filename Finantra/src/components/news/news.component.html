@@ -1,19 +1,26 @@
 
 @if (!loading) {
-    <section>
-        <article *ngFor="let noticia of news" class="mt-5 container">
-            <div class="row">
-                <div class="col-9">
-                    <h5><a [href]="noticia.link" target="_blank">{{noticia.title}}</a></h5>
-                    <p>{{noticia.date}}</p>
+    @if (news.length!=0) {
+        <section>
+            <article *ngFor="let noticia of news" class="mt-5 container">
+                <div class="row">
+                    <div class="col-9">
+                        <h5><a [href]="noticia.link" target="_blank">{{noticia.title}}</a></h5>
+                        <p>{{noticia.date}}</p>
+                    </div>
+            
+                    <div class="col-3">
+                        <img [src]="noticia.imageLink" width="100%" height="100%">
+                    </div>
                 </div>
-        
-                <div class="col-3">
-                    <img [src]="noticia.imageLink" width="100%" height="100%">
-                </div>
-            </div>
-        </article>
-    </section>
+            </article>
+        </section>
+    }@else {
+        <section class="d-flex centradoFlex">
+            Primero seleccione sus temas de intereses
+        </section>
+    }
+    
 }@else {
     <div class="progress-bar">
         <div class="progress"></div>
