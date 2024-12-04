@@ -19,6 +19,9 @@ export class EstadisticaGeneralComponent implements OnInit {
   constructor(private bankService: BankService, private cryptoService: CryptoService) {}
 
   ngOnInit(): void {
+    if (this.updateInterval) {
+      clearInterval(this.updateInterval);
+    }
     this.updateChartData(); 
     this.startAutoUpdate(); 
   }
@@ -86,6 +89,6 @@ export class EstadisticaGeneralComponent implements OnInit {
   startAutoUpdate(): void {
     this.updateInterval = setInterval(() => {
       this.updateChartData(); 
-    }, 60000); 
+    }, 10000); 
   }
 }
