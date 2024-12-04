@@ -121,7 +121,7 @@ export class BankService {
 
     console.log("Body enviado al API:\n", JSON.stringify(body, null, 2));
     console.log("--->"+this.apiUpdateUrl + bankAccountDTO.accountId);
-    return this.http.put(this.apiUpdateUrl + bankAccountDTO.accountId, JSON.stringify(body),  { headers: { 'Content-Type': 'application/json' }});
+    return this.http.patch(this.apiUpdateUrl + bankAccountDTO.accountId, JSON.stringify(body),  { headers: { 'Content-Type': 'application/json' }});
   }
 
   temp(id:String, login: LoginDto):Observable<any>{
