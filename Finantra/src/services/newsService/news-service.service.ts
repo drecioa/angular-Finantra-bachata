@@ -11,7 +11,8 @@ export class NewsService {
   private searchNewsApi="http://localhost:8080/api/v1/new/topics";
   private getTopicsApi="http://localhost:8080/api/v1/user/topics";
   private updateTopicsApi="http://localhost:8080/api/v1/user/topics/update";
-  private getNewsApi="http://localhost:8080/api/v1/new/topics";
+  private getNewsApi="http://localhost:8080/api/v1/new/topics-page";
+  
 
   constructor(private httpClient:HttpClient) { }
 
@@ -28,7 +29,7 @@ export class NewsService {
     return this.httpClient.post(this.updateTopicsApi, {loginDTO, newTopics})
   }
 
-  getNews(login:LoginDto):Observable<any>{
-    return this.httpClient.post(this.getNewsApi, login);
+  getNews(page: number, size: number, login: LoginDto): Observable<any> {
+    return this.httpClient.post<any>(`${this.getNewsApi}?page=${page}&size=${size}`, login);
   }
 }
