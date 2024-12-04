@@ -188,7 +188,7 @@ input::placeholder{
     width: 0;
     height: 100%;
     background-color: #3498db;
-    animation: load 2s infinite;
+    animation: load 0.65s infinite;
   }
   
   @keyframes load {

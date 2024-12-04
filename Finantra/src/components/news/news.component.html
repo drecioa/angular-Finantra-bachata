@@ -1,6 +1,5 @@
 
-@if (!loading) {
-    @if (news.length!=0) {
+
         <section>
             <article *ngFor="let noticia of news" class="mt-5 container">
                 <div class="row">
@@ -10,15 +9,11 @@
                     </div>
                 </div>
             </article>
+            @if (loading) {
+                <div class="progress-bar mt-5">
+                    <div class="progress"></div>
+                </div>
+            }
         </section>
-    }@else {
-        <section class="d-flex centradoFlex">
-            Primero seleccione sus temas de intereses
-        </section>
-    }
+   
     
-}@else {
-    <div class="progress-bar">
-        <div class="progress"></div>
-    </div>
-}
