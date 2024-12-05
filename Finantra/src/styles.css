@@ -183,7 +183,12 @@ input::placeholder{
     overflow: hidden;
     margin: auto;
   }
-  
+  .error-feedback{
+    color: red;
+    font-size: 0.9rem;
+    margin: 0.3rem !important;
+    margin-top: 0.1rem !important;
+}
   .progress {
     width: 0;
     height: 100%;

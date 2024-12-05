@@ -6,27 +6,51 @@
         </ng-container>
     </div>
 
+    
+    <!--TODO: Arreglar el responsive de los mensajes de error Xq-->
     <form [formGroup]="registerForm" (ngSubmit)="submitRegister()" method="post" class="d-flex gap-4 row">
         <article class="d-flex row">
             <div class="form-group col-md-6 col-12">
                 <label for="email">Email</label>
                 <input type="email" id="email" formControlName="email" required>
             </div>
-                
+            @if (registerForm.controls['email'].touched && registerForm.controls['email'].hasError('required')) {
+                <div class="error-feedback">
+                    <span>Please enter your Email</span>
+                </div>
+            }
+            @if (registerForm.controls['email'].touched && registerForm.controls['email'].hasError('email')) {
+                <div class="error-feedback">
+                    <span>Please enter a valid Email</span>
+                </div>
+            }
             <div class="form-group col-md-6 col-12">
                 <label for="password">Password</label>
                 <input type="password" id="password"  formControlName="password" required>
             </div>
-    
+            @if (registerForm.controls['password'].touched && registerForm.controls['password'].hasError('required')) {
+                <div class="error-feedback">
+                    <span>Please enter your password</span>
+                </div>
+            }
             <div class="form-group col-md-6 col-12">
                 <label for="firstName">First Name</label>
                 <input type="text" id="firstName" formControlName="firstName" required>
             </div>
-            
+            @if (registerForm.controls['firstName'].touched && registerForm.controls['firstName'].hasError('required')) {
+                <div class="error-feedback">
+                    <span>Please enter your First Name</span>
+                </div>
+            }
             <div class="form-group col-md-6 col-12">
                 <label for="lastName">Last Name</label>
                 <input type="text" id="lastName" formControlName="lastName" required>
             </div>
+            @if (registerForm.controls['lastName'].touched && registerForm.controls['lastName'].hasError('required')) {
+                <div class="error-feedback">
+                    <span>Please enter your Last Name</span>
+                </div>
+            }
         </article>
         
         <article class="disFlex flexColsNoWrap row">

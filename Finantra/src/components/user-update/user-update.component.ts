@@ -38,7 +38,7 @@ export class UserUpdateComponent implements OnInit{
     this.update.updateUser(new LoginDto(this.user.email, this.user.password), userAux).subscribe(
       (response)=>{
         console.log(response);
-        this.util.auth.login(userAux);
+        this.util.auth.login(userAux, ""); //TODO: Solucionar esto (pocho)
         window.location.reload();
       },
       (error)=>{
