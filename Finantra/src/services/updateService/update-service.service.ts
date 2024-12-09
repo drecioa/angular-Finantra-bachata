@@ -11,11 +11,20 @@ export class UpdateService {
   private apiUrl = `http://localhost:8080/api/v1/user`;
   constructor(private httpClient:HttpClient) { }
 
-  updateUser(loginDTO:LoginDto, updateDTO:User):Observable<any>{
-    console.log({loginDTO, updateDTO});
-    const headers = new HttpHeaders({
-      'Content-Type': 'application/json'
-    });
-    return this.httpClient.post(this.apiUrl, {loginDTO, updateDTO}, {headers});
+  updateUser(updateDTO:User):Observable<any>{
+    let token: string = sessionStorage.getItem('JWT') || "";    
+    return this.httpClient.post(this.apiUrl, updateDTO, { headers: new HttpHeaders({ 'Authorization': token }) });
   }
+
+  //getSolution(userId:string ,exerciseId: string): Observable<SolutionObjResponse> {
+  //  let token: string = localStorage.getItem('JWT') || "";
+  //  return this.http.get<SolutionObjResponse>(`${this.apiUrl}/${exerciseId}/${userId}`, { headers: new HttpHeaders({ 'Authorization': token }) });
+  //}
+
+
+  //postProblem(createexerciserequest:CreateExerciseRequest): Observable<ExerciseResponse> {
+  //  let token: string = localStorage.getItem('JWT') || "";
+  //
+  //  return this.http.post<ExerciseResponse>(`${this.apiUrl}/createExercise`, createexerciserequest,{ headers: new HttpHeaders({ 'Authorization': token }) });  
+  //}
 }

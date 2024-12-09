@@ -34,17 +34,16 @@ export class UserUpdateComponent implements OnInit{
 
   updateUserMethod(form:NgForm):void{
     const userAux:User=form.value;
-
-    this.update.updateUser(new LoginDto(this.user.email, this.user.password), userAux).subscribe(
-      (response)=>{
-        console.log(response);
-        this.util.auth.login(userAux, ""); //TODO: Solucionar esto (pocho)
+    this.update.updateUser(userAux).subscribe({
+      next: (response)=>{
+        console.log("El usuairo se ha actualizado",response);
+        this.util.auth.login(userAux, response.headers.get('Authorization'));
         window.location.reload();
       },
-      (error)=>{
-        console.log(error);
+      error:(error)=>{
+        console.log("Error al actualizar el usuario",error);
       }
-    )
+    });
   }
 
   addTopicToList(value: string):void{
