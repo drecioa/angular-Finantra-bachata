@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { LoginDto } from '@models/loginDto';
 import { Topic } from '@models/Topic';
@@ -21,12 +21,18 @@ export class NewsService {
     return this.httpClient.get(this.searchNewsApi);
   }
 
-  getUserTopics(login: LoginDto):Observable<any>{
-    return this.httpClient.post(this.getTopicsApi, login);
+  getUserTopics():Observable<any>{
+    let token: string = sessionStorage.getItem('JWT') || "";  
+    return this.httpClient.get(this.getTopicsApi, { headers: new HttpHeaders({ 'Authorization': token }) });
   }
 
-  saveTopics(loginDTO:LoginDto, newTopics:Topic[]):Observable<any>{
-    return this.httpClient.post(this.updateTopicsApi, {loginDTO, newTopics})
+  
+  saveTopics( newTopics:Topic[]):Observable<any>{
+    let token: string = sessionStorage.getItem('JWT') || "";  
+    let httpOptionsJson = {
+      headers: new HttpHeaders({'Content-Type':'application/json', 'Authorization': token }),
+    }
+    return this.httpClient.post(this.updateTopicsApi,  newTopics, httpOptionsJson);
   }
 
   getNews(page: number, size: number, login: LoginDto): Observable<any> {
