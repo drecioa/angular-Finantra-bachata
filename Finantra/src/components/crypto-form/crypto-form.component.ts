@@ -53,14 +53,15 @@ export class CryptoFormComponent implements OnInit {
 
   addCrypto (amount:string) {
     const parameters = `?coinId=${this.selectedCrypto.id}&amount=${Number(amount)}`;
-    this.cryptoService.saveCrypto(parameters).subscribe(
-      (response) => {
+    this.cryptoService.saveCrypto(parameters).subscribe({
+     next: (response) => {
         console.log('Crypto procesada correctamente:', response);
         this.utils.redirect.navigate(["/home"]);
       },
-      (error) => {
+      error:(error) => {
         console.error('Error al procesar la crypto:', error);
       }
+    }
     );
   }
 
