@@ -8,24 +8,18 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class NewsService {
-  private searchNewsApi="http://localhost:8080/api/v1/new/topics";
   private getTopicsApi="http://localhost:8080/api/v1/user/topics";
   private updateTopicsApi="http://localhost:8080/api/v1/user/topics/update";
-  private getNewsApi="http://localhost:8080/api/v1/new/topics-page";
+  private searchNewsApi="http://localhost:8080/api/v1/new/topics";
+  private getNewsApi="http://localhost:8080/api/v1/new/topic-news-page";
   
 
   constructor(private httpClient:HttpClient) { }
-
-  
-  getTopics():Observable<any>{
-    return this.httpClient.get(this.searchNewsApi);
-  }
 
   getUserTopics():Observable<any>{
     let token: string = sessionStorage.getItem('JWT') || "";  
     return this.httpClient.get(this.getTopicsApi, { headers: new HttpHeaders({ 'Authorization': token }) });
   }
-
   
   saveTopics( newTopics:Topic[]):Observable<any>{
     let token: string = sessionStorage.getItem('JWT') || "";  
@@ -34,8 +28,13 @@ export class NewsService {
     }
     return this.httpClient.post(this.updateTopicsApi,  newTopics, httpOptionsJson);
   }
-
-  getNews(page: number, size: number, login: LoginDto): Observable<any> {
-    return this.httpClient.post<any>(`${this.getNewsApi}?page=${page}&size=${size}`, login);
+  
+  getTopics():Observable<any>{
+    let token: string = sessionStorage.getItem('JWT') || "";
+    return this.httpClient.get(this.searchNewsApi, { headers: new HttpHeaders({ 'Authorization': token }) });
+  }
+  getNews(page: number, size: number): Observable<any> {
+    let token: string = sessionStorage.getItem('JWT') || "";
+    return this.httpClient.get(`${this.getNewsApi}?page=${page}&size=${size}`, { headers: new HttpHeaders({ 'Authorization': token }) });
   }
 }

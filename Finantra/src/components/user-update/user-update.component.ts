@@ -90,10 +90,14 @@ export class UserUpdateComponent implements OnInit{
         }
       )
 
-      this.newsService.getTopics().subscribe(
-        (data)=>{
-          this.topics=data.data;
-        }, (error)=>{console.error(error);
+      this.newsService.getTopics().subscribe({
+          next:(data)=>{
+            this.topics=data.data;
+            console.log("Los Topics son: ",data);
+          }, 
+          error:(error)=>{
+            console.error("Error al intentar obtener los topics",error);
+          }
         }
       )
 
