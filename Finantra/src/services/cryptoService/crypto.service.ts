@@ -74,7 +74,13 @@ export class CryptoService {
 
     let token: string = sessionStorage.getItem('JWT') || "";
 
-    return this.http.post(`${this.apiSaveUrl}${parameters}`, { headers: new HttpHeaders({ 'Authorization': token }) });
+    let headers = {
+       headers: new HttpHeaders({ 'Authorization': token }) 
+    }
+
+    let finalURL :string =  this.apiSaveUrl+parameters;
+
+    return this.http.post(finalURL, {}, headers );
   }
 
   searchCryptos (query:string): Observable<CryptoDto[]> {

@@ -1,0 +1,11 @@
+button{
+    height: max-content;
+}
+
+
+header{
+    transform: translateY(-25%);
+    padding: 2% 5% 1% 5%;
+    height: max-content;
+    border-bottom: .5em solid #09f;
+}

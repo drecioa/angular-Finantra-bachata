@@ -1,11 +1,11 @@
 import { Component, inject } from '@angular/core';
-import { LoginService } from '../../services/loginService/login-service.service';
 import { CommonModule } from "@angular/common";
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { UtilsService } from '@services/utilsService/utils.service';
 import { RouterLink } from '@angular/router';
 import { User } from '@models/User';
+import { LoginService } from '@services/loginService/login-service.service';
 
 @Component({
   selector: 'app-login',
@@ -16,7 +16,7 @@ import { User } from '@models/User';
 })
 export class LoginComponent {
   protected form: FormGroup;
-  constructor(private login: LoginService, private builder: FormBuilder, private util:UtilsService){
+  constructor(private loginService: LoginService, private builder: FormBuilder, private utilService:UtilsService){
     this.form=this.builder.group({
        email:['', [Validators.required, Validators.email]],
        password:['', Validators.required]
@@ -25,7 +25,7 @@ export class LoginComponent {
   
   logIn():void{
     if(this.form.valid){
-      this.login.checkUser(this.form.value).subscribe(
+      this.loginService.checkUser(this.form.value).subscribe(
         (data)=>{
           console.log(data);
           const user:User={
@@ -34,8 +34,8 @@ export class LoginComponent {
             email: data.body.data.email,
             password:this.form.get('password')?.value //TODO: Borrar este campo del modelo
           };
-          this.util.auth.login(user, data.headers.get('Authorization'));
-          this.util.redirect.navigate(["/home"]);
+          this.utilService.auth.login(user, data.headers.get('Authorization'));
+          this.utilService.redirect.navigate(["/home"]);
         }, 
         (error)=>{
           console.error(error);

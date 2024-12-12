@@ -56,3 +56,14 @@ a{
     padding: 5px;
 }
 
+section{
+    margin-top: 1em;
+    padding: 3% 3% 5% 3%;
+    width: 70%;
+    align-self: center;
+    justify-self: center;
+}
+
+p{
+    text-align: justify;
+}

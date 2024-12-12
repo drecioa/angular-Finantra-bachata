@@ -1,55 +1,51 @@
 import { provideRouter, Routes } from '@angular/router';
-import { AppComponent } from './app.component';
-import { LoginComponent } from '@components/login/login.component';
-import { RegisterComponent } from '@components/register/register.component';
-import { SessionComponent } from '@components/session/session.component';
+import { RegisterComponent } from 'src/app/pages/auth/register/register.component';
+import { SessionComponent } from 'src/app/pages/auth/session/session.component';
 import { homeGuard, sessionGuard } from 'src/guards/session.guard';
-import { HeaderComponent } from '@components/header/header.component';
-import { SessionMainPageComponent } from '@components/session/session-main-page/session-main-page.component';
-import { HomeComponent } from '@components/home/home.component';
+import { HomeComponent } from 'src/app/pages/home/home.component';
+import { NewsComponent } from 'src/app/pages/add-new/news/news.component';
+import { AddNewComponent } from 'src/app/pages/add-new/add-new.component';
+import { CallbackComponent } from 'src/app/pages/callback/callback.component';
+import { UserUpdateComponent } from 'src/app/pages/add-new/user-update/user-update.component';
+import { CryptoFormComponent } from 'src/app/pages/add-new/crypto/crypto-form/crypto-form.component';
+import { BankAccountComponent } from 'src/app/pages/bank-account/bank-account.component';
+import { CryptoWalletComponent } from 'src/app/pages/crypto-wallet/crypto-wallet.component';
+import { LoginComponent } from './pages/login/login.component';
 import { EstadisticaComponent } from '@components/estadistica/estadistica.component';
-import { NewsComponent } from '@components/news/news.component';
-import { AddNewComponent } from '@components/add-new/add-new.component';
-import { CallbackComponent } from '@components/callback/callback.component';
-import { UserUpdateComponent } from '@components/user-update/user-update.component';
-import { CryptoFormComponent } from '@components/crypto-form/crypto-form.component';
-import { BankAccountComponent } from '@components/bank-account/bank-account.component';
-import { CryptoWalletComponent } from '@components/crypto-wallet/crypto-wallet.component';
 
 const routes: Routes = [
-    {path:"auth", component:SessionComponent,
+    {
+        path: "",
+        canActivate: [homeGuard],
         children: [
-            {path: "", component: SessionMainPageComponent, title:"Inicia sesión"},
-            {path: 'login', component:LoginComponent, title:"Login"},
-            {path: 'register', component:RegisterComponent, title: "Registro"}
-        ],
-        canActivate:[sessionGuard]
-    },
-    {path:"home", component:HeaderComponent,
-        children:[
-            {path: "", component:HomeComponent,
-                children:[
-                    {path: "", component: SessionMainPageComponent, title:"Home"},
-                    {path:"bankAccount", component:BankAccountComponent, title:"Cuentas Bancarias"},
-                    {path:"cryptoWallet", component:CryptoWalletComponent, title: "Cryptomonedas"}
+            { path: "home", component: HomeComponent },
+            { path: "bankAccount", component: BankAccountComponent, title: "Cuentas Bancarias" },
+            { path: "cryptoWallet", component: CryptoWalletComponent, title: "Cryptomonedas" },
+            { path: "stats", component: EstadisticaComponent, title: "Estadistica" },
+            {
+                path: "create", component: AddNewComponent,
+                children: [
+                    { path: "crypto", component: CryptoFormComponent, title: "Crypto Search" }
                 ],
-                title:"Cuentas"},
-            {path: "stats", component:EstadisticaComponent, title:"Estadistica"},
-            {path: "create", component: AddNewComponent,
-                children:[
-                    {path: "", component: SessionMainPageComponent, title:"Añadir"},
-                    {path: "crypto", component: CryptoFormComponent, title:"Crypto Search"}
-                ], 
-                title:"Añadir"},
-            {path: "news", component: NewsComponent, title: "Noticias"},
-            {path: "account", component:UserUpdateComponent, title:"Configuracion"}
+                title: "Añadir"
+            },
+            { path: "news", component: NewsComponent, title: "Noticias" },
+            { path: "account", component: UserUpdateComponent, title: "Configuracion" },
+            { path: "callback", component: CallbackComponent },
+        ]
+    },
+    {
+        path: "auth", component: SessionComponent,
+        children: [
+            { path: 'login', component: LoginComponent, title: "Login" },
+            { path: 'register', component: RegisterComponent, title: "Registro" }
         ],
-        canActivate:[homeGuard], 
-        title:'Finantra'},
-    {path:"callback", component: CallbackComponent},
-    {path:"", redirectTo:'/auth', pathMatch:"full"},
-    {path: "**", redirectTo:'/home'}
+        canActivate: [sessionGuard]
+    },
+
+    { path: "", redirectTo: '/auth', pathMatch: "full" },
+    { path: "**", redirectTo: '/home' }
 
 ];
 
-export const rutas= provideRouter(routes);
+export const rutas = provideRouter(routes);
