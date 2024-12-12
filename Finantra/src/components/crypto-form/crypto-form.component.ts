@@ -6,6 +6,7 @@ import { CommonModule } from '@angular/common';
 import { CryptoDto } from '@models/crypto-dto';
 import { UtilsService } from '@services/utilsService/utils.service';
 import { of } from 'rxjs';
+import { CryptoAmount } from '@models/crypto-amount';
 
 @Component({
   selector: 'app-crypto-form',
@@ -21,6 +22,10 @@ export class CryptoFormComponent implements OnInit {
   public selectedCrypto: CryptoDto | null = null;
   public showDropdown = false;
   public highlightedCrypto: CryptoDto | null = null;
+  data: CryptoAmount  = {
+    coinId:"",
+    amount:0
+  };
 
   constructor (private cryptoService: CryptoService, private utils: UtilsService) { }
 
@@ -52,8 +57,9 @@ export class CryptoFormComponent implements OnInit {
   }
 
   addCrypto (amount:string) {
-    const parameters = `?coinId=${this.selectedCrypto.id}&amount=${Number(amount)}`;
-    this.cryptoService.saveCrypto(parameters).subscribe({
+    this.data.coinId = this.selectedCrypto.id;
+    this.data.amount = Number(amount);
+    this.cryptoService.saveCrypto(this.data).subscribe({
      next: (response) => {
         console.log('Crypto procesada correctamente:', response);
         this.utils.redirect.navigate(["/home"]);

@@ -4,6 +4,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { map, Observable, catchError, of } from 'rxjs';
 import { CryptoDto } from '@models/crypto-dto';
 import { Crypto } from '@models/crypto';
+import { CryptoAmount } from '@models/crypto-amount';
 
 @Injectable({
   providedIn: 'root'
@@ -66,7 +67,7 @@ export class CryptoService {
           return of(null); }));
   }
 
-  saveCrypto (parameters:string): Observable<any> {
+  saveCrypto (parameters:CryptoAmount): Observable<any> {
     if (!this.user) {
       console.error('No se ha encontrado el usuario en sessionStorage');
       return new Observable(); 
@@ -74,7 +75,7 @@ export class CryptoService {
 
     let token: string = sessionStorage.getItem('JWT') || "";
 
-    return this.http.post(`${this.apiSaveUrl}${parameters}`, { headers: new HttpHeaders({ 'Authorization': token }) });
+    return this.http.post(this.apiSaveUrl, parameters, { headers: new HttpHeaders({ 'Authorization': token }) });
   }
 
   searchCryptos (query:string): Observable<CryptoDto[]> {
