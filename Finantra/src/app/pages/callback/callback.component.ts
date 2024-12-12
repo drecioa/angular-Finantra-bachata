@@ -5,11 +5,12 @@ import { BankAccountDTO } from '@models/bank-account-dto';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { UtilsService } from '@services/utilsService/utils.service';
+import { HeaderComponent } from "../../../components/header/header.component";
 
 @Component({
   selector: 'app-callback',
   standalone: true,
-  imports:[CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, HeaderComponent],
   templateUrl: './callback.component.html',
   styleUrl: './callback.component.css'
 })

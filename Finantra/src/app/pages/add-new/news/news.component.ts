@@ -5,11 +5,12 @@ import { News } from '@models/News';
 import { User } from '@models/User';
 import { NewsService } from '@services/newsService/news-service.service';
 import { UtilsService } from '@services/utilsService/utils.service';
+import { HeaderComponent } from "../../../../components/header/header.component";
 
 @Component({
   selector: 'app-news',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, HeaderComponent],
   templateUrl: './news.component.html',
   styleUrl: './news.component.css'
 })

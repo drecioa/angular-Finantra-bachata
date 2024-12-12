@@ -5,11 +5,12 @@ import { CryptoService } from '@services/cryptoService/crypto.service';
 import { Chart, ChartType } from 'chart.js';
 import { Crypto } from '@models/crypto';
 import { EspecificStatisticsService } from '@services/statisticsService/especificStadisticsService/especific-statistics.service';
+import { HeaderComponent } from "../header/header.component";
 
 @Component({
   selector: 'app-estadistica',
   standalone: true,
-  imports: [],
+  imports: [HeaderComponent],
   templateUrl: './estadistica.component.html',
   styleUrl: './estadistica.component.css'
 })

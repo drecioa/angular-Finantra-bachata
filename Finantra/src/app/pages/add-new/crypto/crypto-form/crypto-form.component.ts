@@ -6,6 +6,7 @@ import { CommonModule } from '@angular/common';
 import { CryptoDto } from '@models/crypto-dto';
 import { UtilsService } from '@services/utilsService/utils.service';
 import { of } from 'rxjs';
+import { AddCryptoDTO } from '@models/add-crypto-dto';
 
 @Component({
   selector: 'app-crypto-form',
@@ -52,7 +53,7 @@ export class CryptoFormComponent implements OnInit {
   }
 
   addCrypto (amount:string) {
-    const parameters = `?coinId=${this.selectedCrypto.id}&amount=${Number(amount)}`;
+    const parameters = new AddCryptoDTO(this.selectedCrypto.id, Number(amount));
     this.cryptoService.saveCrypto(parameters).subscribe({
      next: (response) => {
         console.log('Crypto procesada correctamente:', response);

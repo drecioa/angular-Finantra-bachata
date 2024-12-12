@@ -8,11 +8,12 @@ import { Transaction } from '@models/Transaction';
 import { User } from '@models/User';
 import { BankService } from '@services/bankService/bank.service';
 import { UtilsService } from '@services/utilsService/utils.service';
+import { HeaderComponent } from "../../../components/header/header.component";
 
 @Component({
   selector: 'app-bank-account',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, HeaderComponent],
   templateUrl: './bank-account.component.html',
   styleUrl: './bank-account.component.css'
 })

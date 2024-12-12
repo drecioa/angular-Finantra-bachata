@@ -3,11 +3,13 @@ import { CryptoService } from '@services/cryptoService/crypto.service';
 import { CommonModule } from '@angular/common';
 import { Crypto } from '@models/crypto';
 import { UtilsService } from '@services/utilsService/utils.service';
+import { AddCryptoDTO } from '@models/add-crypto-dto';
+import { HeaderComponent } from "../../../components/header/header.component";
 
 @Component({
   selector: 'app-crypto-wallet',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, HeaderComponent],
   templateUrl: './crypto-wallet.component.html',
   styleUrl: './crypto-wallet.component.css'
 })
@@ -57,7 +59,7 @@ export class CryptoWalletComponent implements OnInit {
   }
 
   addCrypto (coinId:string, amount:string) {
-    const parameters = `?coinId=${coinId}&amount=${Number(amount)}`;
+    const parameters = new AddCryptoDTO(this.selectedCrypto.id, Number(amount));
     this.cryptoService.saveCrypto(parameters).subscribe(
       (response) => {
         console.log('Crypto procesada correctamente:', response);

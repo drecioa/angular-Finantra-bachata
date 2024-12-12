@@ -1,19 +1,19 @@
+<app-header></app-header>
 
-
-        <section>
-            <article *ngFor="let noticia of news" class="mt-5 container">
-                <div class="row">
-                    <div class="col-12">
-                        <h5><a [href]="noticia.link" target="_blank">{{noticia.title}}</a></h5>
-                        <p>{{noticia.date}}</p>
-                    </div>
-                </div>
-            </article>
-            @if (loading) {
-                <div class="progress-bar mt-5">
-                    <div class="progress"></div>
-                </div>
-            }
-        </section>
-   
-    
+<section>
+  <article *ngFor="let noticia of news" class="mt-5 container">
+    <div class="row">
+      <div class="col-12">
+        <h5>
+          <a [href]="noticia.link" target="_blank">{{ noticia.title }}</a>
+        </h5>
+        <p>{{ noticia.date }}</p>
+      </div>
+    </div>
+  </article>
+  @if (loading) {
+  <div class="progress-bar mt-5">
+    <div class="progress"></div>
+  </div>
+  }
+</section>
