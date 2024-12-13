@@ -1,10 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { Observable } from 'rxjs';
 import { BankAccountDTO } from '@models/bank-account-dto';
 import { User } from '@models/User';
-import { LoginDto } from '@models/loginDto';
-import { Bank } from '@models/Bank';
 import { map } from 'rxjs';
 
 @Injectable({
@@ -34,16 +32,9 @@ export class BankService {
       return new Observable(); 
     }
 
-    const headers = new HttpHeaders({
-      'Content-Type': 'application/json'
-    });
+    let token: string = sessionStorage.getItem('JWT') || "";
 
-    const body = {
-      email: this.user.email, 
-      password: this.user.password 
-    };
-
-    return this.http.post(`${this.apiConnectUrl}?code=${code}`, body, { headers });
+    return this.http.get(`${this.apiConnectUrl}?code=${code}`, { headers: new HttpHeaders({ 'Authorization': token }) });
   }
 
   saveAccount(account:BankAccountDTO): Observable<any> {
@@ -52,9 +43,11 @@ export class BankService {
       return new Observable(); 
     }
 
-    const headers = new HttpHeaders({
-      'Content-Type': 'application/json'
-    });
+    let token: string = sessionStorage.getItem('JWT') || "";
+
+    let httpOptionsJson = {
+      headers: new HttpHeaders({'Content-Type':'application/json', 'Authorization': token }),
+    }
 
     const body = {
       bankAccountDTO: {
@@ -65,14 +58,10 @@ export class BankService {
         currency: account.currency,
         balance: account.balance,
         notes: account.notes
-      },
-      loginDTO: {
-        email: this.user.email, 
-        password: this.user.password 
       }
     };
 
-    return this.http.post(this.apiSaveUrl, body, { headers });
+    return this.http.post(this.apiSaveUrl, body,  httpOptionsJson );
   }
 
   getAllAccounts(): Observable<BankAccountDTO[]> {
@@ -81,29 +70,31 @@ export class BankService {
       return new Observable(); 
     }
 
-    const headers = new HttpHeaders({
-      'Content-Type': 'application/json'
-    });
-
-    const body = {
-        email: this.user.email, 
-        password: this.user.password 
-    };
-
-    return this.http.post<any>(this.apiGetUrl, body, { headers }).pipe(
+    let token: string = sessionStorage.getItem('JWT') || "";
+   
+    return this.http.post<any>(this.apiGetUrl, { headers: new HttpHeaders({ 'Authorization': token }) }).pipe(
       map(response => response.data as BankAccountDTO[])
     );
   }
   
-  getAccounts(login: LoginDto): Observable<any>{
-    return this.http.post(this.apiGetUrl, login);
+  getAccounts(): Observable<any>{
+    let token: string = sessionStorage.getItem('JWT') || "";
+    return this.http.get(this.apiGetUrl, { headers: new HttpHeaders({ 'Authorization': token }) });
   }
 
-  deleteAccount(accountId:string, loginDto:LoginDto):Observable<any>{
-    return this.http.post(this.apiDeleteUrl+accountId, loginDto);
+  deleteAccount(accountId:string):Observable<any>{
+    let token: string = sessionStorage.getItem('JWT') || "";
+    return this.http.get(this.apiDeleteUrl+accountId, { headers: new HttpHeaders({ 'Authorization': token }) });
   }
 
-  updateAccount(bankAccountDTO: BankAccountDTO, loginDTO: LoginDto): Observable<any> {
+  updateAccount(bankAccountDTO: BankAccountDTO): Observable<any> {
+
+    let token: string = sessionStorage.getItem('JWT') || "";
+
+    let httpOptionsJson = {
+      headers: new HttpHeaders({'Content-Type':'application/json', 'Authorization': token }),
+    }
+
     const body = {
       bankAccountDTO: {
         accountId: bankAccountDTO.accountId,
@@ -112,28 +103,25 @@ export class BankService {
         currency: bankAccountDTO.currency,
         balance: bankAccountDTO.balance,
         notes: bankAccountDTO.notes
-      },
-      loginDTO: {
-        email: loginDTO.email,
-        password: loginDTO.password
       }
     };
 
     console.log("Body enviado al API:\n", JSON.stringify(body, null, 2));
     console.log("--->"+this.apiUpdateUrl + bankAccountDTO.accountId);
-    return this.http.patch(this.apiUpdateUrl + bankAccountDTO.accountId, JSON.stringify(body),  { headers: { 'Content-Type': 'application/json' }});
+    return this.http.patch(this.apiUpdateUrl + bankAccountDTO.accountId, JSON.stringify(body), httpOptionsJson);
   }
 
-  temp(id:String, login: LoginDto):Observable<any>{
-    return this.http.post(this.apis+id, login);
+  temp(id:String):Observable<any>{
+    let token: string = sessionStorage.getItem('JWT') || "";
+    return this.http.get(this.apis+id, { headers: new HttpHeaders({ 'Authorization': token }) });
   }
 
-  getAllTransactions(accountId:string, login:LoginDto, from:string, to:string):Observable<any>{
+  getAllTransactions(accountId:string, from:string, to:string):Observable<any>{
+    let token: string = sessionStorage.getItem('JWT') || "";
     const params = new HttpParams()
     .set('from', from)
     .set('to', to);
-
-    return this.http.post(this.apiTransacctionUrl+accountId, login,  { params });
+    return this.http.get<any>(this.apiTransacctionUrl+accountId, { headers: new HttpHeaders({ 'Authorization':token }), params: params });
   }
 
 }

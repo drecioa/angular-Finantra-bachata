@@ -3,7 +3,6 @@ import { Component, OnInit } from '@angular/core';
 import { FormsModule, NgForm } from '@angular/forms';
 import { Bank } from '@models/Bank';
 import { BankAccountDTO } from '@models/bank-account-dto';
-import { LoginDto } from '@models/loginDto';
 import { Transaction } from '@models/Transaction';
 import { User } from '@models/User';
 import { BankService } from '@services/bankService/bank.service';
@@ -45,12 +44,12 @@ export class BankAccountComponent implements OnInit{
           this.user= JSON.parse(data);
       }
     );
-    this.getCuentas(new LoginDto(this.user.email, this.user.password));
+    this.getCuentas();
   }
 
-  getCuentas(login: LoginDto):void{
+  getCuentas():void{
     this.loading=true;
-    this.bankService.getAccounts(login).subscribe(
+    this.bankService.getAccounts().subscribe(
       (response)=>{
         if (typeof response.data === 'string') {
           this.accounts = JSON.parse(response.data);
@@ -71,9 +70,7 @@ export class BankAccountComponent implements OnInit{
   }
 
   onDelete(accountId:string):void{
-    this.bankService.deleteAccount(accountId, 
-      new LoginDto(this.user.email, this.user.password)
-    ).subscribe((data)=>{
+    this.bankService.deleteAccount(accountId).subscribe((data)=>{
       console.log(data)
     }, (error)=>{
       console.error(error);
@@ -82,7 +79,7 @@ export class BankAccountComponent implements OnInit{
 
     this.setEmptyTarget();
     setTimeout(()=>{
-      this.getCuentas(new LoginDto(this.user.email, this.user.password));
+      this.getCuentas();
     }, 1000)
     ;
   }
@@ -127,7 +124,6 @@ export class BankAccountComponent implements OnInit{
         this.targetAccount.balance,
         form.value.notes
       ),
-      new LoginDto(this.user.email, this.user.password)
     ).subscribe((data)=>{
       console.log(data);
       console.log("operacion realizado correctamente");
@@ -136,14 +132,14 @@ export class BankAccountComponent implements OnInit{
     })
     document.getElementById("miraCierrame")?.click();
     /////////////////////////////////////////////////////////////////////////////////////////////////////////
-    this.bankService.temp(this.targetAccount.accountId, new LoginDto(this.user.email, this.user.password)).subscribe((data)=>{
+    this.bankService.temp(this.targetAccount.accountId).subscribe((data)=>{
       console.log("actualizado?: "+JSON.stringify(data));
     }, (error)=>{console.error("madre mia")});
     /////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     this.setEmptyTarget();
     setTimeout(()=>{
-      this.getCuentas(new LoginDto(this.user.email, this.user.password));
+      this.getCuentas();
     }, 1000)
   }
   //WARNING: Aun no funciona------------------------------------------------------
@@ -160,8 +156,7 @@ export class BankAccountComponent implements OnInit{
   }
 
   setTransactions():void{
-    this.bankService.getAllTransactions(this.targetAccount.accountId, 
-                                        new LoginDto(this.user.email, this.user.password), 
+    this.bankService.getAllTransactions(this.targetAccount.accountId,  
                                         this.fromDat, 
                                         this.toDat).subscribe(
                                           (data)=>{
