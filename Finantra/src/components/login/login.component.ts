@@ -29,20 +29,21 @@ export class LoginComponent {
         (data)=>{
           console.log(data);
           const user:User={
-            firstName: data.data.firstName,
-            lastName: data.data.lastName,
-            email: data.data.email,
-            password:this.form.get('password')?.value
+            firstName: data.body.data.firstName,
+            lastName: data.body.data.lastName,
+            email: data.body.data.email,
+            password:this.form.get('password')?.value //TODO: Borrar este campo del modelo
           };
-          this.util.auth.login(user);
+          this.util.auth.login(user, data.headers.get('Authorization'));
           this.util.redirect.navigate(["/home"]);
         }, 
         (error)=>{
+          console.error(error);
+
           const err = document.getElementById("error");
           if (err) {
             err.style.visibility = "visible";
           }
-          console.log(error);
         }
       );
     }

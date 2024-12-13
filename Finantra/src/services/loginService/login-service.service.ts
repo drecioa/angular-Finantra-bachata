@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http'
+import {  HttpHeaders} from '@angular/common/http'
 import { LoginDto } from '../../models/loginDto';
 import { Observable } from 'rxjs';
 @Injectable({
@@ -11,6 +12,6 @@ export class LoginService {
   constructor(private http: HttpClient) { }
 
   checkUser(login: LoginDto):Observable<any>{
-    return this.http.post(this.apiUrl, login);
+    return this.http.post<any>(this.apiUrl, JSON.stringify(login), {headers: new HttpHeaders({'Content-Type':'application/json'}), observe: 'response'});
   }
 }

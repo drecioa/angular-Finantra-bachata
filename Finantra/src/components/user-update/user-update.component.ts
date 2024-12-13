@@ -34,17 +34,16 @@ export class UserUpdateComponent implements OnInit{
 
   updateUserMethod(form:NgForm):void{
     const userAux:User=form.value;
-
-    this.update.updateUser(new LoginDto(this.user.email, this.user.password), userAux).subscribe(
-      (response)=>{
-        console.log(response);
-        this.util.auth.login(userAux);
+    this.update.updateUser(userAux).subscribe({
+      next: (response)=>{
+        console.log("El usuairo se ha actualizado",response);
+        this.util.auth.login(userAux, response.headers.get('Authorization'));
         window.location.reload();
       },
-      (error)=>{
-        console.log(error);
+      error:(error)=>{
+        console.log("Error al actualizar el usuario",error);
       }
-    )
+    });
   }
 
   addTopicToList(value: string):void{
@@ -63,7 +62,8 @@ export class UserUpdateComponent implements OnInit{
   }
 
   saveTopics(){
-    this.newsService.saveTopics(new LoginDto(this.user.email, this.user.password), this.listTopic).subscribe(
+    console.log(this.listTopic);
+    this.newsService.saveTopics(this.listTopic).subscribe(
       (data)=>{
         console.log(data);
         this.util.redirect.navigate(["home/news"])
@@ -72,14 +72,16 @@ export class UserUpdateComponent implements OnInit{
   }
 
   borrarCuenta(){
-    this.deleteUserService.deleteUser(new LoginDto(this.user.email, this.user.password)).subscribe(
-      (data)=>{
-        console.log(data);
+    this.deleteUserService.deleteUser().subscribe({
+      next:(data)=>{
+        console.log("Cuenta borrada correctamente ",data);
         this.util.auth.logout();
         this.util.redirect.navigate(["/auth"])
-      }, (error)=>{console.error(error);
+      }, 
+      error:(error)=>{
+        console.error("Error al intentar borrar la cuenta",error);
       }
-    );
+    });
   }
   ngOnInit(): void {
       this.util.auth.data.subscribe(
@@ -88,15 +90,19 @@ export class UserUpdateComponent implements OnInit{
         }
       )
 
-      this.newsService.getTopics().subscribe(
-        (data)=>{
-          this.topics=data.data;
-        }, (error)=>{console.error(error);
+      this.newsService.getTopics().subscribe({
+          next:(data)=>{
+            this.topics=data.data;
+            console.log("Los Topics son: ",data);
+          }, 
+          error:(error)=>{
+            console.error("Error al intentar obtener los topics",error);
+          }
         }
       )
 
       
-      this.newsService.getUserTopics(new LoginDto(this.user.email, this.user.password)).subscribe(
+      this.newsService.getUserTopics().subscribe(
         (data)=>{
           this.listOriginTopic=data.data;
           if(this.listOriginTopic.length!=0){

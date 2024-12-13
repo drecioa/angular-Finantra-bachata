@@ -38,7 +38,7 @@ export class NewsComponent implements OnInit{
     if (this.loading || this.lastPageReached) return;
 
     this.loading = true;
-    this.newsService.getNews(this.page, this.size, new LoginDto(this.user.email, this.user.password)).subscribe({
+    this.newsService.getNews(this.page, this.size).subscribe({
       next: (response) => {
         console.log("Respuesta: " , response)
         if (response.data.content.length === 0) {

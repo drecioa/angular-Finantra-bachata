@@ -12,14 +12,19 @@ export class AuthService {
   
   constructor() { }
 
-  login(user:User):void{
+  login(user:User, token:string):void{
     sessionStorage.setItem("sessionState", "true");
     sessionStorage.setItem("user", `${JSON.stringify(user)}`);
+    sessionStorage.setItem("JWT", token);
     this.dataBehavior.next(this.getUser());
   }
 
   logout():void{
-    sessionStorage.removeItem("sessionState");
+    sessionStorage.clear();
+  }
+
+  getToken():string| null{
+    return sessionStorage.getItem("JWT");
   }
 
   isLogged():boolean{

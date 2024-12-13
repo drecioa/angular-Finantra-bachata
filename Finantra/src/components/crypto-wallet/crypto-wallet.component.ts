@@ -3,6 +3,7 @@ import { CryptoService } from '@services/cryptoService/crypto.service';
 import { CommonModule } from '@angular/common';
 import { Crypto } from '@models/crypto';
 import { UtilsService } from '@services/utilsService/utils.service';
+import { CryptoAmount } from '@models/crypto-amount';
 
 @Component({
   selector: 'app-crypto-wallet',
@@ -16,6 +17,10 @@ export class CryptoWalletComponent implements OnInit {
   public cryptos: Crypto[] = [];
   public selectedCrypto: Crypto | null = null;  
   public showAmountInput: boolean = false;
+  data: CryptoAmount  = {
+    coinId:"",
+    amount:0
+  };
 
   constructor(private cryptoService: CryptoService, utils: UtilsService) { }
 
@@ -57,8 +62,10 @@ export class CryptoWalletComponent implements OnInit {
   }
 
   addCrypto (coinId:string, amount:string) {
-    const parameters = `?coinId=${coinId}&amount=${Number(amount)}`;
-    this.cryptoService.saveCrypto(parameters).subscribe(
+    this.data.coinId = coinId;
+    this.data.amount = Number(amount);
+    
+    this.cryptoService.saveCrypto(this.data).subscribe(
       (response) => {
         console.log('Crypto procesada correctamente:', response);
         this.loadCryptos(); 

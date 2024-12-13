@@ -8,14 +8,11 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class UpdateService {
-  private apiUrl = `http://localhost:8080/api/v1/user`;
+  private apiUrl = `http://localhost:8080/api/v1/user/update`;
   constructor(private httpClient:HttpClient) { }
 
-  updateUser(loginDTO:LoginDto, updateDTO:User):Observable<any>{
-    console.log({loginDTO, updateDTO});
-    const headers = new HttpHeaders({
-      'Content-Type': 'application/json'
-    });
-    return this.httpClient.post(this.apiUrl, {loginDTO, updateDTO}, {headers});
+  updateUser(updateDTO:User):Observable<any>{
+    let token: string = sessionStorage.getItem('JWT') || "";    
+    return this.httpClient.post(this.apiUrl, updateDTO, { headers: new HttpHeaders({ 'Authorization': token }) });
   }
 }
