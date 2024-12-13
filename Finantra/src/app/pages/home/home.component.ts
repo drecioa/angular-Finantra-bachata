@@ -5,21 +5,27 @@ import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { HeaderComponent } from '@components/header/header.component';
 import { NotificationComponent } from "../../../components/notification/notification.component";
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { PresentationComponent } from "../../../components/presentation/presentation.component";
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule, FormsModule, RouterOutlet, RouterLink, RouterLinkActive, HeaderComponent, NotificationComponent],
+  imports: [CommonModule, FormsModule, RouterOutlet, RouterLink, RouterLinkActive, HeaderComponent, NotificationComponent, PresentationComponent],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css',
 })
 export class HomeComponent {
-  finantraHomeText:string = "Finantra es la aplicación definitiva para gestionar todas tus finanzas en un solo lugar. Conecta tus cuentas bancarias y monederos de criptomonedas para obtener una visión completa de tu situación financiera. Analiza tus ingresos, gastos e inversiones con estadísticas y gráficos fáciles de entender, diseñados para ayudarte a tomar decisiones inteligentes. Finantra simplifica tus finanzas y te da el control total de tu dinero, estés donde estés.";
+  finantraHomeText:string = "Saludos---Finantra es la aplicación definitiva para gestionar todas tus finanzas en un solo lugar. Conecta tus cuentas bancarias y monederos de criptomonedas para obtener una visión completa de tu situación financiera. Analiza tus ingresos, gastos e inversiones con estadísticas y gráficos fáciles de entender, diseñados para ayudarte a tomar decisiones inteligentes. Finantra simplifica tus finanzas y te da el control total de tu dinero, estés donde estés.";
+  finantraHomeText2:string = "Esto es una prueba---->Finantra es la aplicación definitiva para gestionar todas tus finanzas en un solo lugar. Conecta tus cuentas bancarias y monederos de criptomonedas para obtener una visión completa de tu situación financiera. Analiza tus ingresos, gastos e inversiones con estadísticas y gráficos fáciles de entender, diseñados para ayudarte a tomar decisiones inteligentes. Finantra simplifica tus finanzas y te da el control total de tu dinero, estés donde estés.";
+  
+  srcFinantra1:string="https://static.wikia.nocookie.net/memes-pedia/images/d/df/Nada.png/revision/latest?cb=20201119214705&path-prefix=es";
+  srcFinantra2:string="https://cdn.capitalradio.es/embed/67e5cec58b4a5476358f53773b72c059b1591979001/stonks.jpg?imagick=1&size=500";
   typeInformation:string = 'cuentas bancarias';
   infoName:string='';
   dialog = inject(MatDialog);
   dialogRef: MatDialogRef<any>;
   
+  protected textReceived?:string;
   constructor(private zone: NgZone){}
 
   search(infoName:string):void {
@@ -36,6 +42,8 @@ export class HomeComponent {
     });
   }
 
- 
+  message(value:string){
+    this.textReceived=value;
+  }
 
 }

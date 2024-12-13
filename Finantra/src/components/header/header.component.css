@@ -30,3 +30,41 @@ section {
     width: 90vw;
     justify-self: center;
 }
+.imgBandera{
+    width: auto;
+    height: 100%;
+}
+.mecagoendios{
+    justify-content: end;
+    height: 3em;
+}
+
+.mecagoendios select{
+    background-color: transparent;
+    border: none;
+    outline: none;
+    color: white;
+
+    appearance: none; 
+    -webkit-appearance: none;
+    -moz-appearance: none;
+
+}
+.languageContainer{
+    padding: 1%;
+    background-color: #487898;
+    border-radius: 2em;
+    transition: all 1s;
+    &:hover{
+        transform: scale(1.05);
+        text-decoration: underline;
+    }
+}
+.mecagoendios select option{
+    text-align: center;
+    color: black;
+    &:checked{
+        background-color: #09f; 
+        color: black;
+    }
+}

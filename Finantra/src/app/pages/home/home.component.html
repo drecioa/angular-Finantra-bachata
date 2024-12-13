@@ -15,11 +15,11 @@
         </div>
     </nav>
 </article>
-<section class=" row">
-    <p class="col-lg-5 col-12">
-        {{finantraHomeText}}
-    </p>
+<ng-content *ngIf="textReceived">
+    {{textReceived}}
+</ng-content>
 
-    <img class="col-lg-7 col-12" src="https://images.ecestaticos.com/SBix7JuKYG_dFjjI6A5sB7Y-Jac=/74x0:1189x829/996x747/filters:fill(white):format(jpg)/f.elconfidencial.com%2Foriginal%2Ff1b%2F42b%2F413%2Ff1b42b4134006e638b05e1bbd69f0f9e.jpg" alt="img stonks" srcset="">
-</section>
+<app-presentation [presentationText]="finantraHomeText" [srcImg]="srcFinantra1" (newItemEvent)="message($event)"></app-presentation>
+<app-presentation [presentationText]="finantraHomeText2" [srcImg]="srcFinantra2" (newItemEvent)="message($event)"></app-presentation>
+
 <router-outlet class="container"></router-outlet>
