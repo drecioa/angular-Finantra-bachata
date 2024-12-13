@@ -11,6 +11,7 @@ export class GeneralStatisticsService {
 
   constructor(private http: HttpClient) { }
 
+  //TODO: Comprobar si se utiliza
   getGeneralValues (): Observable<any> {
     return this.http.post(this.apiUrl, {});
   }

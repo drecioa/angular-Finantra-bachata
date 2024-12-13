@@ -20,8 +20,11 @@ export class EspecificStatisticsService {
   }
 
   getHistoricalCrypto(coinId:string, fromDate:string, toDate:string): Observable<number[]> {
+    let token: string = sessionStorage.getItem('JWT') || "";
+
     return this.http.get<{ data: { dateTime: string; price: number }[] }>(
       `${this.apiHistoricalCryptoUrl}${coinId}?fromDate=${fromDate}&toDate=${toDate}`
+      ,{ headers: new HttpHeaders({ 'Authorization': token }) }
     ).pipe(
       map((response) => {
         console.log(response);
@@ -35,17 +38,15 @@ export class EspecificStatisticsService {
   }
 
   getHistoricalBank(accountId:string, fromDate:string, toDate:string): Observable<number[]> {
-    const headers = new HttpHeaders({
-      'Content-Type': 'application/json'
-    });
+    
+    let token: string = sessionStorage.getItem('JWT') || "";
 
-    const body = {
-        email: this.user.email, 
-        password: this.user.password 
-    };
+    let httpOptionsJson = {
+      headers: new HttpHeaders({'Content-Type':'application/json', 'Authorization': token }),
+    }
 
     return this.http.post<{ data: { bankAccountId: string; bankName: string; balance: number; date: string }[] }>(
-      `${this.apiHistoricalBankUrl}${accountId}?fromDate=${fromDate}&toDate=${toDate}`, body, {headers}
+      `${this.apiHistoricalBankUrl}${accountId}?fromDate=${fromDate}&toDate=${toDate}`,  httpOptionsJson
     ).pipe(
       map((response) => {
         console.log(response);

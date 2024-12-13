@@ -49,8 +49,8 @@ export class BankService {
       headers: new HttpHeaders({'Content-Type':'application/json', 'Authorization': token }),
     }
 
-    const body = {
-      bankAccountDTO: {
+    
+      let bankAccountDTO: BankAccountDTO = {
         accountId: account.accountId,
         providerId: account.providerId,
         bankName: account.bankName,
@@ -59,9 +59,9 @@ export class BankService {
         balance: account.balance,
         notes: account.notes
       }
-    };
+    
 
-    return this.http.post(this.apiSaveUrl, body,  httpOptionsJson );
+    return this.http.post(this.apiSaveUrl, bankAccountDTO,  httpOptionsJson );
   }
 
   getAllAccounts(): Observable<BankAccountDTO[]> {
@@ -72,7 +72,7 @@ export class BankService {
 
     let token: string = sessionStorage.getItem('JWT') || "";
    
-    return this.http.post<any>(this.apiGetUrl, { headers: new HttpHeaders({ 'Authorization': token }) }).pipe(
+    return this.http.get<any>(this.apiGetUrl, { headers: new HttpHeaders({ 'Authorization': token }) }).pipe(
       map(response => response.data as BankAccountDTO[])
     );
   }
@@ -84,7 +84,7 @@ export class BankService {
 
   deleteAccount(accountId:string):Observable<any>{
     let token: string = sessionStorage.getItem('JWT') || "";
-    return this.http.get(this.apiDeleteUrl+accountId, { headers: new HttpHeaders({ 'Authorization': token }) });
+    return this.http.delete(this.apiDeleteUrl+accountId, { headers: new HttpHeaders({ 'Authorization': token }) });
   }
 
   updateAccount(bankAccountDTO: BankAccountDTO): Observable<any> {
