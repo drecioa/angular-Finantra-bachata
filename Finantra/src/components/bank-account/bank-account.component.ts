@@ -71,9 +71,11 @@ export class BankAccountComponent implements OnInit{
 
   onDelete(accountId:string):void{
     this.bankService.deleteAccount(accountId).subscribe((data)=>{
-      console.log(data)
+      console.log(data);
+      alert("Account deleted successfully");
     }, (error)=>{
       console.error(error);
+      alert("Error when trying to delete account");
     });
     document.getElementById("miraCierrame2")?.click();
 

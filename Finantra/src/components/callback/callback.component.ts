@@ -49,10 +49,12 @@ export class CallbackComponent implements OnInit{
         this.bankService.saveAccount(selectedAccounts[i]).subscribe(
           (response) => {
             console.log('Cuenta procesada correctamente:', response);
+            alert("Added account successfully");
             this.utils.redirect.navigate(["/home"]);
           },
           (error) => {
             console.error('Error al procesar la cuenta:', error);
+            alert("Error when trying to add account");
           }
         );
       }

@@ -53,14 +53,17 @@ export class CryptoWalletComponent implements OnInit {
     this.cryptoService.deleteCrypto(coinId).subscribe(
       (response) => {
         console.log('Criptomoneda eliminada:', response);
+        alert("Crypto deleted successfully");
         this.loadCryptos();  
       },
       (error) => {
         console.error('Error al eliminar la criptomoneda:', error);
+        alert("Error when trying to delete crypto");
       }
     );
   }
 
+  //Actualiza la crypto seleciconada
   addCrypto (coinId:string, amount:string) {
     this.data.coinId = coinId;
     this.data.amount = Number(amount);
@@ -71,9 +74,11 @@ export class CryptoWalletComponent implements OnInit {
         this.loadCryptos(); 
         this.showAmountInput = false;  
         this.selectedCrypto = null; 
+        alert("Crypto updated successfully");
       },
       (error) => {
         console.error('Error al procesar la crypto:', error);
+        alert("Error when trying to update crypto");
       }
     );
   }

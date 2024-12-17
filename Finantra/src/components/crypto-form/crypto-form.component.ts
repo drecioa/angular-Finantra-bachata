@@ -56,16 +56,19 @@ export class CryptoFormComponent implements OnInit {
     }, 200);
   }
 
+  //Añade la crypto seleciconada
   addCrypto (amount:string) {
     this.data.coinId = this.selectedCrypto.id;
     this.data.amount = Number(amount);
     this.cryptoService.saveCrypto(this.data).subscribe({
      next: (response) => {
         console.log('Crypto procesada correctamente:', response);
+        alert("Crypto added successfully");
         this.utils.redirect.navigate(["/home"]);
       },
       error:(error) => {
         console.error('Error al procesar la crypto:', error);
+        alert("Error when trying to add crypto");
       }
     }
     );

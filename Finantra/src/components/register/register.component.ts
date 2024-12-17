@@ -31,11 +31,13 @@ export class RegisterComponent {
       this.registerService.register(this.registerForm.value).subscribe(
         (response) => {
           this.registerStatus = 'Registro exitoso!';
+          alert(this.registerStatus);
           this.util.redirect.navigate(["/auth/login"])
           console.log(response);
         }, 
         (error) => {
           this.registerStatus = 'Registro fallido!';
+          alert(this.registerStatus);
           console.log(error);
         }
       )

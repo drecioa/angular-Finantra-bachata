@@ -37,11 +37,13 @@ export class UserUpdateComponent implements OnInit{
     this.update.updateUser(userAux).subscribe({
       next: (response)=>{
         console.log("El usuairo se ha actualizado",response);
+        alert("Account updated successfully");
         this.util.auth.login(userAux, response.headers.get('Authorization'));
         window.location.reload();
       },
       error:(error)=>{
         console.log("Error al actualizar el usuario",error);
+        alert("Error when trying to update account");
       }
     });
   }
@@ -66,8 +68,11 @@ export class UserUpdateComponent implements OnInit{
     this.newsService.saveTopics(this.listTopic).subscribe(
       (data)=>{
         console.log(data);
+        alert("Added new Topics");
         this.util.redirect.navigate(["home/news"])
-      }, (error)=>{console.error(error);}
+      }, (error)=>{console.error(error);
+        alert("Error adding new Topics");
+      }
     )
   }
 
@@ -75,11 +80,13 @@ export class UserUpdateComponent implements OnInit{
     this.deleteUserService.deleteUser().subscribe({
       next:(data)=>{
         console.log("Cuenta borrada correctamente ",data);
+        alert("Account deleted successfully");
         this.util.auth.logout();
         this.util.redirect.navigate(["/auth"])
       }, 
       error:(error)=>{
         console.error("Error al intentar borrar la cuenta",error);
+        alert("Error when trying to delete account");
       }
     });
   }
