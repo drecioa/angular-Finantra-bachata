@@ -3,7 +3,7 @@ import { UtilsService } from '@services/utilsService/utils.service';
 import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { User } from '@models/User';
 import { EstadisticaGeneralComponent } from 'src/app/pages/estadistica-general/estadistica-general.component';
-
+import { CustomTranslationLoaderComponent } from '@components/custom-translation-loader/custom-translation-loader.component';
 
 @Component({
   selector: 'app-header',
@@ -23,8 +23,9 @@ export class HeaderComponent implements OnInit{
 
   private language:string="es-ES";
   protected srcFlag:string;
+  public finantraText:string ="Saludos---Finantra es la aplicación definitiva para gestionar todas tus finanzas en un solo lugar. Conecta tus cuentas bancarias y monederos de criptomonedas para obtener una visión completa de tu situación financiera. Analiza tus ingresos, gastos e inversiones con estadísticas y gráficos fáciles de entender, diseñados para ayudarte a tomar decisiones inteligentes. Finantra simplifica tus finanzas y te da el control total de tu dinero, estés donde estés.";
 
-  constructor (private util:UtilsService){}
+  constructor (private util:UtilsService, translate: CustomTranslationLoaderComponent){}
 
   logout():void{
     this.util.auth.logout();
